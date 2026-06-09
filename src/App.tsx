@@ -1,11 +1,7 @@
-import './App.css'
+import Train from './components/Train'
 
 function App() {
-  return (
-    <>
-     <h1>ComboForge</h1>
-    </>
-  )
+  return <Train />
 }
 
 export default App
