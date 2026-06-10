@@ -1,56 +1,58 @@
+import { useTrainingTimer } from '../hooks/useTrainingTimer'
 import '../styles/train.css'
-import { useState } from 'react'
-
-type TrainingStatus = 'idle' | 'running' | 'paused' | 'ended';
+import { formatTime } from '../utils/time'
 
 export default function Train() {
-    const [status, setStatus] = useState<TrainingStatus>('idle')
+  const { status, timer, startSession, pauseSession, endSession } =
+    useTrainingTimer()
 
-    return (
-        <main className="train-screen">
-            <header className="train-header">
-                <p className="eyebrow">Boxing</p>
-                <h1>ComboForge</h1>
-                <p className="session-status">Status: {status}</p>
-            </header>
+  const startButtonLabel =
+    status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
 
-            <section className="timer-panel">
-                <p className="round-label">Round 1</p>
-                <p className="timer-display">03:00</p>
-            </section>
+  const canPause = status === 'running'
+  const canEnd = status !== 'idle' && status !== 'ended'
 
-            <section className="combo-panel">
-                <p className="combo-label">Current Combo</p>
-                <h2>{'Lead Jab -> Rear Cross'}</h2>
-                <p className="upcoming-combo">{'Next: Lead Hook -> Rear Cross'}</p>
-            </section>
+  return (
+    <main className="train-screen">
+      <header className="train-header">
+        <p className="eyebrow">Boxing</p>
+        <h1>ComboForge</h1>
+        <p className="session-status">Status: {status}</p>
+      </header>
 
-            <section className="training-controls">
-                <button type="button" onClick={() => setStatus('running')}>
-                    {status === 'paused' ? 'Resume' : 'Start'}
-                </button>
-                <button 
-                    type="button" 
-                    onClick={() => setStatus('paused')}
-                    disabled={status !== 'running'}
-                >
-                    Pause
-                </button>
-                <button 
-                    type="button" 
-                    onClick={() => setStatus('ended')}
-                    disabled={status === 'idle' || status === 'ended'}
-                >
-                    End
-                </button>
-            </section>
+      <section className="timer-panel">
+        <p className="round-label">
+          {timer.phase === 'round' ? `Round ${timer.currentRound}` : 'Rest'}
+        </p>
+        <p className="timer-display">{formatTime(timer.remainingSeconds)}</p>
+      </section>
 
-            <nav className="bottom-nav" aria-label="Primary Navigation">
-                <button type="button" aria-current="page">Train</button>
-                <button type="button">Combos</button>
-                <button type="button">History</button>
-                <button type="button">Settings</button>
-            </nav>
-        </main>
-    )
+      <section className="combo-panel">
+        <p className="combo-label">Current Combo</p>
+        <h2>{'Lead Jab -> Rear Cross'}</h2>
+        <p className="upcoming-combo">{'Next: Lead Hook -> Rear Cross'}</p>
+      </section>
+
+      <section className="training-controls">
+        <button type="button" onClick={startSession}>
+          {startButtonLabel}
+        </button>
+        <button type="button" onClick={pauseSession} disabled={!canPause}>
+          Pause
+        </button>
+        <button type="button" onClick={endSession} disabled={!canEnd}>
+          End
+        </button>
+      </section>
+
+      <nav className="bottom-nav" aria-label="Primary Navigation">
+        <button type="button" aria-current="page">
+          Train
+        </button>
+        <button type="button">Combos</button>
+        <button type="button">History</button>
+        <button type="button">Settings</button>
+      </nav>
+    </main>
+  )
 }

@@ -26,10 +26,10 @@ Shadowboxing and solo striking practice often lack variety and structure.
 
 Athletes frequently:
 
-* Repeat the same combinations
-* Lose focus during rounds
-* Lack training partners to call combinations
-* Need lightweight tools that work without subscriptions or accounts
+- Repeat the same combinations
+- Lose focus during rounds
+- Lack training partners to call combinations
+- Need lightweight tools that work without subscriptions or accounts
 
 ComboForge aims to provide an always-available virtual striking coach.
 
@@ -49,9 +49,9 @@ The application should function as a virtual coach that guides users through com
 
 The application should support:
 
-* Boxing
-* Kickboxing
-* Muay Thai
+- Boxing
+- Kickboxing
+- Muay Thai
 
 Each discipline may expose different techniques and default combinations.
 
@@ -63,9 +63,9 @@ The primary experience should be optimized for mobile devices.
 
 Users should be able to:
 
-* Start a session quickly
-* Operate the application with minimal interaction
-* Read callouts clearly during training
+- Start a session quickly
+- Operate the application with minimal interaction
+- Read callouts clearly during training
 
 ---
 
@@ -95,10 +95,10 @@ Data should only be stored when it provides value to the user.
 
 Users should be able to:
 
-* Train
-* Create custom combos
-* Save settings
-* View history
+- Train
+- Create custom combos
+- Save settings
+- View history
 
 without creating an account.
 
@@ -108,9 +108,9 @@ without creating an account.
 
 Future account functionality should exist solely for:
 
-* Synchronization
-* Backup
-* Multi-device usage
+- Synchronization
+- Backup
+- Multi-device usage
 
 Accounts should never be required for core functionality.
 
@@ -120,12 +120,12 @@ Accounts should never be required for core functionality.
 
 ComboForge should avoid collecting:
 
-* Real names
-* Email addresses
-* Phone numbers
-* Physical locations
-* Birth dates
-* Advertising profiles
+- Real names
+- Email addresses
+- Phone numbers
+- Physical locations
+- Birth dates
+- Advertising profiles
 
 unless a future feature explicitly requires them.
 
@@ -139,9 +139,9 @@ A discipline determines available techniques.
 
 Supported disciplines:
 
-* Boxing
-* Kickboxing
-* Muay Thai
+- Boxing
+- Kickboxing
+- Muay Thai
 
 ---
 
@@ -149,20 +149,20 @@ Supported disciplines:
 
 Supported stances:
 
-* Orthodox
-* Southpaw
+- Orthodox
+- Southpaw
 
 The application should avoid left/right terminology and instead use:
 
-* Lead
-* Rear
+- Lead
+- Rear
 
 Examples:
 
-* Lead Jab
-* Rear Cross
-* Lead Hook
-* Rear Kick
+- Lead Jab
+- Rear Cross
+- Lead Hook
+- Rear Kick
 
 ---
 
@@ -182,15 +182,15 @@ An interruption is a special event inserted during a combo.
 
 Examples:
 
-* Slip
-* Block
-* Check
-* Teep
+- Slip
+- Block
+- Check
+- Teep
 
 Interruptions may be:
 
-* Offensive
-* Defensive
+- Offensive
+- Defensive
 
 ---
 
@@ -200,16 +200,16 @@ Interruptions may be:
 
 Users can:
 
-* Start a session
-* Pause a session
-* End a session
+- Start a session
+- Pause a session
+- End a session
 
 A session contains:
 
-* Rounds
-* Rest periods
-* Difficulty settings
-* Combo sources
+- Rounds
+- Rest periods
+- Difficulty settings
+- Combo sources
 
 ---
 
@@ -217,17 +217,17 @@ A session contains:
 
 Users should be able to configure:
 
-* Number of rounds
-* Round duration
-* Rest duration
+- Number of rounds
+- Round duration
+- Rest duration
 
 Preset configurations should be provided.
 
 Examples:
 
-* 3 x 3 min
-* 5 x 3 min
-* 5 x 5 min
+- 3 x 3 min
+- 5 x 3 min
+- 5 x 5 min
 
 ---
 
@@ -246,9 +246,9 @@ Fight
 
 The application should read:
 
-* Combos
-* Interruptions
-* Round transitions
+- Combos
+- Interruptions
+- Round transitions
 
 using browser text-to-speech.
 
@@ -260,9 +260,9 @@ The application should support optional bundled retro-inspired background music.
 
 Examples:
 
-* Chiptune
-* Game Boy inspired
-* PS1 inspired
+- Chiptune
+- Game Boy inspired
+- PS1 inspired
 
 ---
 
@@ -270,15 +270,15 @@ Examples:
 
 Users should be able to:
 
-* Create combos
-* Edit combos
-* Delete combos
+- Create combos
+- Edit combos
+- Delete combos
 
 The application should include starter combos for:
 
-* Boxing
-* Kickboxing
-* Muay Thai
+- Boxing
+- Kickboxing
+- Muay Thai
 
 ---
 
@@ -286,18 +286,18 @@ The application should include starter combos for:
 
 ### Easy
 
-* Slow pace
-* No interruptions
+- Slow pace
+- No interruptions
 
 ### Normal
 
-* Medium pace
-* Occasional interruptions
+- Medium pace
+- Occasional interruptions
 
 ### Hard
 
-* Fast pace
-* Frequent interruptions
+- Fast pace
+- Frequent interruptions
 
 ---
 
@@ -305,11 +305,11 @@ The application should include starter combos for:
 
 Users should be able to configure:
 
-* Pace
-* Interruption frequency
-* Offensive interruptions
-* Defensive interruptions
-* Combo sources
+- Pace
+- Interruption frequency
+- Offensive interruptions
+- Defensive interruptions
+- Combo sources
 
 ---
 
@@ -317,12 +317,12 @@ Users should be able to configure:
 
 The application should store:
 
-* Date
-* Duration
-* Number of rounds
-* Discipline
-* Difficulty
-* Combos used
+- Date
+- Duration
+- Number of rounds
+- Discipline
+- Difficulty
+- Combos used
 
 ---
 
@@ -330,9 +330,9 @@ The application should store:
 
 The application should display:
 
-* Sessions completed
-* Total training time
-* Total rounds completed
+- Sessions completed
+- Total training time
+- Total rounds completed
 
 ---
 
@@ -368,10 +368,10 @@ Application settings and preferences.
 
 Display:
 
-* Remaining time
-* Current combo
-* Upcoming combo preview
-* Round information
+- Remaining time
+- Current combo
+- Upcoming combo preview
+- Round information
 
 The current combo should be visually emphasized.
 
@@ -387,8 +387,8 @@ Initial versions should use a local-first approach.
 
 Potential implementation:
 
-* IndexedDB
-* Dexie
+- IndexedDB
+- Dexie
 
 ---
 
@@ -396,8 +396,8 @@ Potential implementation:
 
 Users should be able to:
 
-* Export data as JSON
-* Import data from JSON
+- Export data as JSON
+- Import data from JSON
 
 ---
 
@@ -413,9 +413,9 @@ Synchronization should remain optional.
 
 ## Frontend
 
-* React
-* TypeScript
-* Vite
+- React
+- TypeScript
+- Vite
 
 ---
 
@@ -431,16 +431,16 @@ Local storage should remain the primary source of truth.
 
 Included in v1:
 
-* Round timer
-* Text-to-speech
-* Combo engine
-* Custom combos
-* Difficulty presets
-* Custom difficulty settings
-* Session history
-* Statistics
-* Local storage
-* JSON export/import
+- Round timer
+- Text-to-speech
+- Combo engine
+- Custom combos
+- Difficulty presets
+- Custom difficulty settings
+- Session history
+- Statistics
+- Local storage
+- JSON export/import
 
 ---
 
@@ -448,21 +448,21 @@ Included in v1:
 
 ## v2
 
-* Favorites
-* Combo lists
-* Calendar view
-* Weekly goals
-* Monthly goals
-* Synchronization
+- Favorites
+- Combo lists
+- Calendar view
+- Weekly goals
+- Monthly goals
+- Synchronization
 
 ---
 
 ## v3
 
-* Smartwatch integration
-* Heart-rate integration
-* Activity tracking
-* Advanced coaching
+- Smartwatch integration
+- Heart-rate integration
+- Activity tracking
+- Advanced coaching
 
 ---
 
@@ -470,10 +470,9 @@ Included in v1:
 
 The initial version should not include:
 
-* Social features
-* Competitive leaderboards
-* Advertising
-* Mandatory accounts
-* AI coaching
-* Subscription requirements
-
+- Social features
+- Competitive leaderboards
+- Advertising
+- Mandatory accounts
+- AI coaching
+- Subscription requirements

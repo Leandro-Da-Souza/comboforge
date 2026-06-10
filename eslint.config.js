@@ -18,9 +18,9 @@ export default defineConfig([
     ],
     languageOptions: {
       parserOptions: {
-	      projectService: true,
-	      tsconfigRootDir: import.meta.dirname,
-      },	    
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
       globals: globals.browser,
     },
   },
