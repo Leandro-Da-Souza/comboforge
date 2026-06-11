@@ -40,7 +40,11 @@ export default function Train() {
         <p className="eyebrow">{currentPreset.name}</p>
         <h1>ComboForge</h1>
         <p className="session-status">Status: {status}</p>
-        <div className="theme-select" role="group" aria-label="Theme Selector">
+        <section
+          className="theme-select"
+          role="group"
+          aria-label="Theme Selector"
+        >
           {themeOptions.map((theme) => (
             <button
               type="button"
@@ -51,10 +55,10 @@ export default function Train() {
               {theme.displayName}
             </button>
           ))}
-        </div>
+        </section>
       </header>
 
-      <div className="preset-selector" aria-label="Timer preset">
+      <section className="preset-selector" aria-label="Timer preset">
         {timerPresets.map((preset) => (
           <button
             key={preset.id}
@@ -66,7 +70,7 @@ export default function Train() {
             {preset.name}
           </button>
         ))}
-      </div>
+      </section>
 
       <section className="timer-panel">
         <p className="round-label">
