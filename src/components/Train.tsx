@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useTrainingTimer } from '../hooks/useTrainingTimer'
+import { useTheme } from '../hooks/useTheme'
 import '../styles/train.css'
 import { formatTime } from '../utils/time'
 import { timerPresets } from '../config/timer.config'
 import type { TimerPreset } from '../types/timer'
+import { themeOptions } from '../utils/theme'
 
 export default function Train() {
   const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
@@ -18,6 +20,7 @@ export default function Train() {
     endSession,
     resetSession,
   } = useTrainingTimer(currentPreset.config)
+  const { theme: currentTheme, setTheme } = useTheme()
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -37,6 +40,18 @@ export default function Train() {
         <p className="eyebrow">{currentPreset.name}</p>
         <h1>ComboForge</h1>
         <p className="session-status">Status: {status}</p>
+        <div className="theme-select" role="group" aria-label="Theme Selector">
+          {themeOptions.map((theme) => (
+            <button
+              type="button"
+              key={theme.name}
+              onClick={() => setTheme(theme.name)}
+              aria-pressed={theme.name === currentTheme}
+            >
+              {theme.displayName}
+            </button>
+          ))}
+        </div>
       </header>
 
       <div className="preset-selector" aria-label="Timer preset">
