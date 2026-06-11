@@ -1,9 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="brutalist">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+    />
+    <script>
+      try {
+        const theme = localStorage.getItem('theme')
+        const allowedThemes = ['brutalist', 'muaythai', 'poster']
+        document.documentElement.dataset.theme = allowedThemes.includes(theme)
+          ? theme
+          : 'brutalist'
+      } catch {
+        document.documentElement.dataset.theme = 'brutalist'
+      }
+    </script>
     <title>comboforge</title>
   </head>
   <body>

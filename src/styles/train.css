@@ -4,8 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background: #101114;
-  color: #f5f5f2;
+  background-color: var(--canvas);
+  background-image: var(--background);
+  color: var(--foreground);
+  font-family: var(--ff-sans);
 }
 
 .train-header {
@@ -17,25 +19,61 @@
 .eyebrow,
 .round-label,
 .combo-label {
-  color: #a8aaa3;
+  color: var(--muted-foreground);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .train-header h1 {
+  color: var(--primary);
+  font-family: var(--ff-display);
   font-size: 32px;
+  font-weight: 700;
   line-height: 1.1;
+}
+
+.session-status {
+  color: var(--muted-foreground);
+}
+
+.preset-selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.preset-selector button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.preset-selector button[aria-pressed='true'] {
+  border-color: var(--primary);
+  background: var(--surface-2);
+  color: var(--primary);
+}
+
+.preset-selector button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .timer-panel {
   padding: 24px;
-  border: 1px solid #2b2d33;
-  border-radius: 8px;
-  background: #181a1f;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .timer-display {
+  color: var(--foreground);
+  font-family: var(--ff-mono);
   font-size: 72px;
   line-height: 1;
   font-weight: 700;
@@ -43,20 +81,23 @@
 
 .combo-panel {
   padding: 24px;
-  border: 1px solid #2b2d33;
-  border-radius: 8px;
-  background: #181a1f;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .combo-panel h2 {
   margin-top: 8px;
+  color: var(--foreground);
+  font-family: var(--ff-display);
   font-size: 32px;
+  font-weight: 700;
   line-height: 1.1;
 }
 
 .upcoming-combo {
   margin-top: 12px;
-  color: #a8aaa3;
+  color: var(--muted-foreground);
 }
 
 .training-controls {
@@ -69,10 +110,15 @@
   min-height: 48px;
   flex: 1;
   border: 0;
-  border-radius: 8px;
-  background: #f0c15a;
-  color: #101114;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
   font-weight: 700;
+}
+
+.training-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .bottom-nav {
@@ -84,13 +130,13 @@
 
 .bottom-nav button {
   min-height: 44px;
-  border: 1px solid #2b2d33;
-  border-radius: 8px;
-  background: #181a1f;
-  color: #f5f5f2;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--foreground);
 }
 
 .bottom-nav button[aria-current='page'] {
-  border-color: #f0c15a;
-  color: #f0c15a;
+  border-color: var(--primary);
+  color: var(--primary);
 }

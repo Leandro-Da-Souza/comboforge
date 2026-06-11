@@ -1,0 +1,72 @@
+/* ============ THEME: TRADITIONAL MUAY THAI ============ */
+:root[data-theme='muaythai'] {
+  --radius: 0.5rem;
+  --canvas: #1a0a08;
+  --background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(201, 162, 76, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(201, 162, 76, 0.05),
+      transparent 50%
+    );
+  --foreground: #f1e6c8;
+  --surface: #221110;
+  --surface-2: #2b1715;
+  --border: #3a2218;
+  --muted: #1f0d0b;
+  --muted-foreground: #8a7256;
+  --primary: #c9a24c;
+  --primary-foreground: #1a0a08;
+  --ff-display: 'Cinzel', 'Cormorant Garamond', serif;
+  --ff-sans: 'Inter', sans-serif;
+  --ff-mono: 'JetBrains Mono', monospace;
+}
+
+/* ============ THEME: FIGHT PROMOTION POSTER ============ */
+:root[data-theme='poster'] {
+  --radius: 0.25rem;
+  --canvas: #0d0b08;
+  --background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(245, 236, 214, 0.025) 0 1px,
+      transparent 1px 3px
+    ),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 210, 63, 0.06),
+      transparent 50%
+    );
+  --foreground: #f5ecd6;
+  --surface: #18140e;
+  --surface-2: #221c13;
+  --border: #3a2f1d;
+  --muted: #18140e;
+  --muted-foreground: #8a7a5a;
+  --primary: #ffd23f;
+  --primary-foreground: #0d0b08;
+  --ff-display: 'Anton', 'Druk', 'League Gothic', sans-serif;
+  --ff-sans: 'Inter', sans-serif;
+  --ff-mono: 'JetBrains Mono', monospace;
+}
+/* ============ THEME: BRUTALIST (default) ============ */
+:root[data-theme='brutalist'] {
+  --radius: 0.75rem;
+  --canvas: #0a0a0a;
+  --background: none;
+  --foreground: #f5f5f5;
+  --surface: #161616;
+  --surface-2: #1f1f1f;
+  --border: #2a2a2a;
+  --muted: #1a1a1a;
+  --muted-foreground: #737373;
+  --primary: #e63946;
+  --primary-foreground: #ffffff;
+  --ff-display: 'Bebas Neue', sans-serif;
+  --ff-sans: 'Inter', sans-serif;
+  --ff-mono: 'JetBrains Mono', monospace;
+}
