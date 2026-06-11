@@ -1,38 +1,8 @@
 import { useEffect, useReducer } from 'react'
-
-// Later: split ended into completed/abandoned and show summary modal for completed sessions.
-type TrainingStatus = 'idle' | 'running' | 'paused' | 'ended'
-type TimerPhase = 'round' | 'rest'
-type TimerState = {
-  currentRound: number
-  totalRounds: number
-  phase: TimerPhase
-  remainingSeconds: number
-  roundDurationSeconds: number
-  restDurationSeconds: number
-}
-
-type TrainingState = {
-  status: TrainingStatus
-  timer: TimerState
-}
-
-type TrainingAction =
-  | { type: 'start' }
-  | { type: 'pause' }
-  | { type: 'end' }
-  | { type: 'tick' }
-
-function createDefaultTimer(): TimerState {
-  return {
-    currentRound: 1,
-    totalRounds: 3,
-    phase: 'round',
-    remainingSeconds: 180,
-    roundDurationSeconds: 180,
-    restDurationSeconds: 60,
-  }
-}
+import type { TrainingAction, TrainingState } from '../types/training'
+import type { TimerConfig } from '../types/timer'
+import { defaultTimerConfig } from '../config/timer.config'
+import { createTimerState, resetTimerProgress } from '../utils/timer'
 
 function trainingTimerReducer(
   state: TrainingState,
@@ -42,7 +12,10 @@ function trainingTimerReducer(
     case 'start': {
       return {
         status: 'running',
-        timer: state.status === 'ended' ? createDefaultTimer() : state.timer,
+        timer:
+          state.status === 'ended'
+            ? createTimerState(action.config)
+            : state.timer,
       }
     }
     case 'pause': {
@@ -54,7 +27,7 @@ function trainingTimerReducer(
     case 'end': {
       return {
         status: 'ended',
-        timer: createDefaultTimer(),
+        timer: createTimerState(action.config),
       }
     }
     case 'tick': {
@@ -76,7 +49,7 @@ function trainingTimerReducer(
         if (timer.currentRound >= timer.totalRounds) {
           return {
             status: 'ended',
-            timer: createDefaultTimer(),
+            timer: resetTimerProgress(state.timer),
           }
         }
 
@@ -107,10 +80,10 @@ function trainingTimerReducer(
   }
 }
 
-export function useTrainingTimer() {
+export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
   const [state, dispatch] = useReducer(trainingTimerReducer, {
     status: 'idle',
-    timer: createDefaultTimer(),
+    timer: createTimerState(config),
   })
 
   useEffect(() => {
@@ -127,7 +100,7 @@ export function useTrainingTimer() {
   }, [state.status, state.timer.remainingSeconds])
 
   function startSession() {
-    dispatch({ type: 'start' })
+    dispatch({ type: 'start', config })
   }
 
   function pauseSession() {
@@ -135,7 +108,7 @@ export function useTrainingTimer() {
   }
 
   function endSession() {
-    dispatch({ type: 'end' })
+    dispatch({ type: 'end', config })
   }
 
   return {
