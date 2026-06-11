@@ -18,18 +18,21 @@ function trainingTimerReducer(
             : state.timer,
       }
     }
+
     case 'pause': {
       return {
         ...state,
         status: 'paused',
       }
     }
+
     case 'end': {
       return {
         status: 'ended',
         timer: createTimerState(action.config),
       }
     }
+
     case 'tick': {
       if (state.status !== 'running') return state
 
@@ -74,6 +77,13 @@ function trainingTimerReducer(
       }
     }
 
+    case 'reset': {
+      return {
+        status: 'idle',
+        timer: createTimerState(action.config),
+      }
+    }
+
     default: {
       return state
     }
@@ -111,11 +121,16 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
     dispatch({ type: 'end', config })
   }
 
+  function resetSession(config: TimerConfig) {
+    dispatch({ type: 'reset', config })
+  }
+
   return {
     status: state.status,
     timer: state.timer,
     startSession,
     pauseSession,
     endSession,
+    resetSession,
   }
 }

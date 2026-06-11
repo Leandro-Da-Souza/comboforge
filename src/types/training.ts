@@ -12,3 +12,4 @@ export type TrainingAction =
   | { type: 'pause' }
   | { type: 'end'; config: TimerConfig }
   | { type: 'tick' }
+  | { type: 'reset'; config: TimerConfig }

@@ -1,28 +1,63 @@
+import { useState } from 'react'
 import { useTrainingTimer } from '../hooks/useTrainingTimer'
 import '../styles/train.css'
 import { formatTime } from '../utils/time'
+import { timerPresets } from '../config/timer.config'
+import type { TimerPreset } from '../types/timer'
 
 export default function Train() {
-  const { status, timer, startSession, pauseSession, endSession } =
-    useTrainingTimer()
+  const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
+  const currentPreset =
+    timerPresets.find((preset) => preset.id === selectedPresetId) ??
+    timerPresets[0]
+  const {
+    status,
+    timer,
+    startSession,
+    pauseSession,
+    endSession,
+    resetSession,
+  } = useTrainingTimer(currentPreset.config)
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
 
   const canPause = status === 'running'
+  const canChangePreset = status === 'idle' || status === 'ended'
   const canEnd = status !== 'idle' && status !== 'ended'
+
+  function handlePresetSelect(preset: TimerPreset): void {
+    setSelectedPresetId(preset.id)
+    resetSession(preset.config)
+  }
 
   return (
     <main className="train-screen">
       <header className="train-header">
-        <p className="eyebrow">Boxing</p>
+        <p className="eyebrow">{currentPreset.name}</p>
         <h1>ComboForge</h1>
         <p className="session-status">Status: {status}</p>
       </header>
 
+      <div className="preset-selector" aria-label="Timer preset">
+        {timerPresets.map((preset) => (
+          <button
+            key={preset.id}
+            type="button"
+            aria-pressed={preset.id === selectedPresetId}
+            disabled={!canChangePreset}
+            onClick={() => handlePresetSelect(preset)}
+          >
+            {preset.name}
+          </button>
+        ))}
+      </div>
+
       <section className="timer-panel">
         <p className="round-label">
-          {timer.phase === 'round' ? `Round ${timer.currentRound}` : 'Rest'}
+          {timer.phase === 'round'
+            ? `Round ${timer.currentRound} / ${timer.totalRounds}`
+            : 'Rest'}
         </p>
         <p className="timer-display">{formatTime(timer.remainingSeconds)}</p>
       </section>

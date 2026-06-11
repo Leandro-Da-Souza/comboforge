@@ -14,3 +14,9 @@ export type TimerConfig = {
   roundDurationSeconds: number
   restDurationSeconds: number
 }
+
+export type TimerPreset = {
+  id: string
+  name: string
+  config: TimerConfig
+}
