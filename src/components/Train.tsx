@@ -6,6 +6,7 @@ import { formatTime } from '../utils/time'
 import { timerPresets } from '../config/timer.config'
 import type { TimerPreset } from '../types/timer'
 import { themeOptions } from '../utils/theme'
+import Navigation from './Navigation'
 
 export default function Train() {
   const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
@@ -99,14 +100,7 @@ export default function Train() {
         </button>
       </section>
 
-      <nav className="bottom-nav" aria-label="Primary Navigation">
-        <button type="button" aria-current="page">
-          Train
-        </button>
-        <button type="button">Combos</button>
-        <button type="button">History</button>
-        <button type="button">Settings</button>
-      </nav>
+      <Navigation />
     </main>
   )
 }

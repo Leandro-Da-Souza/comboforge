@@ -1,0 +1,15 @@
+.bottom-nav a {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--foreground);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+}
+
+.bottom-nav a[aria-current='page'] {
+  border-color: var(--primary);
+  color: var(--primary);
+}

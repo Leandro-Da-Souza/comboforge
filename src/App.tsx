@@ -1,14 +1,17 @@
 import { Navigate, Route, Routes } from 'react-router'
-import Train from './components/Train'
+import TrainPage from './pages/TrainPage'
+import CombosPage from './pages/CombosPage'
+import HistoryPage from './pages/HistoryPage'
+import SettingsPage from './pages/SettingsPage'
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/train" replace />} />
-      <Route path="/train" element={<Train />} />
-      <Route path="/combos" element={<div>Combos</div>} />
-      <Route path="/history" element={<div>History</div>} />
-      <Route path="/settings" element={<div>Settings</div>} />
+      <Route path="/" element={<Navigate to="train" replace />} />
+      <Route path="/train" element={<TrainPage />} />
+      <Route path="/combos" element={<CombosPage />} />
+      <Route path="/history" element={<HistoryPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   )
 }
