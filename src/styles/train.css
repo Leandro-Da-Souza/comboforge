@@ -1,13 +1,7 @@
 .train-screen {
-  min-height: 100vh;
-  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background-color: var(--canvas);
-  background-image: var(--background);
-  color: var(--foreground);
-  font-family: var(--ff-sans);
 }
 
 .train-header {
@@ -119,24 +113,4 @@
 .training-controls button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-.bottom-nav {
-  margin-top: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.bottom-nav button {
-  min-height: 44px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--foreground);
-}
-
-.bottom-nav button[aria-current='page'] {
-  border-color: var(--primary);
-  color: var(--primary);
 }

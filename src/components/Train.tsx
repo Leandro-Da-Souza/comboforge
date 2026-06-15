@@ -6,7 +6,6 @@ import { formatTime } from '../utils/time'
 import { timerPresets } from '../config/timer.config'
 import type { TimerPreset } from '../types/timer'
 import { themeOptions } from '../utils/theme'
-import Navigation from './Navigation'
 
 export default function Train() {
   const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
@@ -36,7 +35,7 @@ export default function Train() {
   }
 
   return (
-    <main className="train-screen">
+    <section className="train-screen">
       <header className="train-header">
         <p className="eyebrow">{currentPreset.name}</p>
         <h1>ComboForge</h1>
@@ -99,8 +98,6 @@ export default function Train() {
           End
         </button>
       </section>
-
-      <Navigation />
-    </main>
+    </section>
   )
 }

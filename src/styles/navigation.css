@@ -1,12 +1,20 @@
+.bottom-nav {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
 .bottom-nav a {
   min-height: 44px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--foreground);
-  display: grid;
-  place-items: center;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom-nav a[aria-current='page'] {
