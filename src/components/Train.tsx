@@ -4,7 +4,6 @@ import '../styles/train.css'
 import { formatTime } from '../utils/time'
 import { timerPresets } from '../config/timer.config'
 import type { TimerPreset } from '../types/timer'
-import ThemeSelector from './ThemeSelector'
 
 export default function Train() {
   const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)

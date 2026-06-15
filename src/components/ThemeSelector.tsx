@@ -1,6 +1,6 @@
 import { themeOptions } from '../utils/theme'
 import { useTheme } from '../hooks/useTheme'
-import '../styles/visuals.css'
+import '../styles/theme-selector.css'
 
 export default function ThemeSelector() {
   const { theme: currentTheme, setTheme } = useTheme()
