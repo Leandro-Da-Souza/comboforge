@@ -1,0 +1,24 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.page-eyebrow {
+  color: var(--muted-foreground);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  color: var(--primary);
+  font-family: var(--ff-display);
+  line-height: 1;
+}
+
+.page-description {
+  max-width: 36rem;
+  color: var(--muted-foreground);
+}
