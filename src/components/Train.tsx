@@ -29,6 +29,8 @@ export default function Train() {
   const canPause = status === 'running'
   const canChangePreset = status === 'idle' || status === 'ended'
   const canEnd = status !== 'idle' && status !== 'ended'
+  const isSetup = status === 'idle' || status === 'ended'
+  const isActiveSession = status === 'running' || status === 'paused'
 
   function handlePresetSelect(preset: TimerPreset): void {
     setSelectedPresetId(preset.id)
@@ -38,18 +40,22 @@ export default function Train() {
   return (
     <section className="train-screen">
       <SessionStatus status={status} />
-      <PresetSelector
-        presets={timerPresets}
-        selectedPresetId={selectedPresetId}
-        canChangePreset={canChangePreset}
-        onPresetSelect={handlePresetSelect}
-      />
 
+      {isSetup ? (
+        <PresetSelector
+          presets={timerPresets}
+          selectedPresetId={selectedPresetId}
+          canChangePreset={canChangePreset}
+          onPresetSelect={handlePresetSelect}
+        />
+      ) : null}
       <TimerPanel timer={timer} />
 
       <ComboPanel
-        currentCombo={'Lead Jab -> Rear Cross'}
-        upcomingCombo={'Next: Lead Hook -> Rear Cross'}
+        currentCombo={isSetup ? 'Tap Start' : 'Lead Jab -> Rear Cross'}
+        upcomingCombo={
+          isActiveSession ? 'Next: Lead Hook -> Rear Cross' : currentPreset.name
+        }
       />
 
       <TrainingControls
