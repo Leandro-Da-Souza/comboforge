@@ -1,3 +1,5 @@
+import Button from './ui/Button'
+
 type TrainingControlsProps = {
   startButtonLabel: string
   onStart: () => void
@@ -17,15 +19,25 @@ export default function TrainingControls({
 }: TrainingControlsProps) {
   return (
     <section className="training-controls">
-      <button type="button" onClick={onStart}>
+      <Button variant="primary" type="button" onClick={onStart}>
         {startButtonLabel}
-      </button>
-      <button type="button" onClick={onPause} disabled={!canPause}>
+      </Button>
+      <Button
+        variant="secondary"
+        type="button"
+        onClick={onPause}
+        disabled={!canPause}
+      >
         Pause
-      </button>
-      <button type="button" onClick={onEnd} disabled={!canEnd}>
+      </Button>
+      <Button
+        variant="secondary"
+        type="button"
+        onClick={onEnd}
+        disabled={!canEnd}
+      >
         End
-      </button>
+      </Button>
     </section>
   )
 }

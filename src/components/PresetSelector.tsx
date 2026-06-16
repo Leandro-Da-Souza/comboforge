@@ -1,4 +1,5 @@
 import type { TimerPreset } from '../types/timer'
+import Button from './ui/Button'
 
 type PresetSelectorProps = {
   presets: TimerPreset[]
@@ -16,15 +17,16 @@ export default function PresetSelector({
   return (
     <section className="preset-selector" aria-label="Timer preset">
       {presets.map((preset) => (
-        <button
+        <Button
           key={preset.id}
           type="button"
-          aria-pressed={preset.id === selectedPresetId}
+          variant="secondary"
+          pressed={preset.id === selectedPresetId}
           disabled={!canChangePreset}
           onClick={() => onPresetSelect(preset)}
         >
           {preset.name}
-        </button>
+        </Button>
       ))}
     </section>
   )

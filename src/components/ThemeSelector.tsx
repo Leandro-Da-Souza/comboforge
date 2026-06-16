@@ -1,5 +1,6 @@
 import { themeOptions } from '../utils/theme'
 import { useTheme } from '../hooks/useTheme'
+import Button from './ui/Button'
 import '../styles/theme-selector.css'
 
 export default function ThemeSelector() {
@@ -8,11 +9,12 @@ export default function ThemeSelector() {
   return (
     <section className="theme-select" role="group" aria-label="Theme Selector">
       {themeOptions.map((theme) => (
-        <button
+        <Button
           type="button"
+          variant="secondary"
           key={theme.name}
           onClick={() => setTheme(theme.name)}
-          aria-pressed={theme.name === currentTheme}
+          pressed={theme.name === currentTheme}
         >
           {theme.displayName}
           {theme.name === currentTheme ? (
@@ -20,7 +22,7 @@ export default function ThemeSelector() {
           ) : (
             <span aria-hidden="true">&#9744;</span>
           )}
-        </button>
+        </Button>
       ))}
     </section>
   )
