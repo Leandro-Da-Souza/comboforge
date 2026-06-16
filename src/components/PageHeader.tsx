@@ -13,8 +13,11 @@ export default function PageHeader({
 }: PageHeaderProps) {
   return (
     <header className="page-header">
-      {eyebrow ? <p className="page-eyebrow">{eyebrow}</p> : null}
-      <h1>{title}</h1>
+      <section className="page-title">
+        <h1>{title}</h1>
+        {eyebrow ? <span className="page-eyebrow">{eyebrow}</span> : null}
+      </section>
+
       {description ? <p className="page-description">{description}</p> : null}
     </header>
   )
