@@ -14,7 +14,7 @@ function getNextCombo(combos: Combo[]): Combo | undefined {
   return combos[randomIndex]
 }
 
-export default function useComboRotation(combos: Combo[]): ComboRotation {
+export function useComboRotation(combos: Combo[]): ComboRotation {
   const [currentCombo, setCurrentCombo] = useState<Combo | undefined>(
     () => combos[0],
   )

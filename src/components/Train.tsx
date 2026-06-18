@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useTrainingTimer } from '../hooks/useTrainingTimer'
 import '../styles/train.css'
 import { timerPresets } from '../config/timer.config'
@@ -10,12 +9,12 @@ import TrainingControls from './TrainingControls'
 import SessionStatus from './SessionStatus'
 import { starterCombos } from '../data/starterCombo'
 import { formatCombo } from '../utils/combo'
-import { getTimerPresetById } from '../utils/preset'
-import useComboRotation from '../hooks/useComboRotation'
+import { useComboRotation } from '../hooks/useComboRotation'
+import { usePresetSelection } from '../hooks/usePresetSelection'
 
 export default function Train() {
-  const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
-  const currentPreset = getTimerPresetById(selectedPresetId)
+  const { selectedPresetId, selectedPreset, selectPreset } =
+    usePresetSelection(timerPresets)
   const {
     status,
     timer,
@@ -23,7 +22,7 @@ export default function Train() {
     pauseSession,
     endSession,
     resetSession,
-  } = useTrainingTimer(currentPreset.config)
+  } = useTrainingTimer(selectedPreset.config)
   const { currentCombo, upcomingCombo } = useComboRotation(starterCombos)
 
   const startButtonLabel =
@@ -36,7 +35,7 @@ export default function Train() {
   const isActiveSession = status === 'running' || status === 'paused'
 
   function handlePresetSelect(preset: TimerPreset): void {
-    setSelectedPresetId(preset.id)
+    selectPreset(preset)
     resetSession(preset.config)
   }
 
@@ -61,7 +60,7 @@ export default function Train() {
         upcomingCombo={
           isActiveSession
             ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
-            : currentPreset.name
+            : selectedPreset.name
         }
       />
 
