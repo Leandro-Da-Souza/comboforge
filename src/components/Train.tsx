@@ -9,8 +9,9 @@ import ComboPanel from './ComboPanel'
 import TrainingControls from './TrainingControls'
 import SessionStatus from './SessionStatus'
 import { starterCombos } from '../data/starterCombo'
-import { formatCombo, getNextCombo } from '../utils/combo'
+import { formatCombo } from '../utils/combo'
 import { getTimerPresetById } from '../utils/preset'
+import useComboRotation from '../hooks/useComboRotation'
 
 export default function Train() {
   const [selectedPresetId, setSelectedPresetId] = useState(timerPresets[0].id)
@@ -23,6 +24,7 @@ export default function Train() {
     endSession,
     resetSession,
   } = useTrainingTimer(currentPreset.config)
+  const { currentCombo, upcomingCombo } = useComboRotation(starterCombos)
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -37,9 +39,6 @@ export default function Train() {
     setSelectedPresetId(preset.id)
     resetSession(preset.config)
   }
-
-  const currentCombo = starterCombos[0]
-  const upcomingCombo = starterCombos[1]
 
   return (
     <section className="train-screen">
@@ -56,10 +55,12 @@ export default function Train() {
       <TimerPanel timer={timer} />
 
       <ComboPanel
-        currentCombo={isSetup ? 'Tap Start' : formatCombo(currentCombo.actions)}
+        currentCombo={
+          isSetup ? 'Tap Start' : formatCombo(currentCombo?.actions ?? [])
+        }
         upcomingCombo={
           isActiveSession
-            ? `Next: ${formatCombo(upcomingCombo.actions)}`
+            ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
             : currentPreset.name
         }
       />
