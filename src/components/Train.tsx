@@ -11,6 +11,11 @@ import { starterCombos } from '../data/starterCombo'
 import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { usePresetSelection } from '../hooks/usePresetSelection'
+import type { Discipline } from '../types/core'
+import { useState } from 'react'
+import DisciplineSelector from './DisciplineSelector'
+
+const disciplines: Discipline[] = ['boxing', 'kickboxing', 'muay-thai']
 
 export default function Train() {
   const { selectedPresetId, selectedPreset, selectPreset } =
@@ -23,7 +28,14 @@ export default function Train() {
     endSession,
     resetSession,
   } = useTrainingTimer(selectedPreset.config)
-  const { currentCombo, upcomingCombo } = useComboRotation(starterCombos)
+  const [selectedDiscipline, setSelectedDiscipline] =
+    useState<Discipline>('boxing')
+
+  const availableCombos = starterCombos.filter(
+    (combo) => combo.discipline === selectedDiscipline,
+  )
+  const { currentCombo, upcomingCombo, resetCombos } =
+    useComboRotation(availableCombos)
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -39,6 +51,20 @@ export default function Train() {
     resetSession(preset.config)
   }
 
+  function handleStartSession(): void {
+    resetCombos()
+    startSession()
+  }
+
+  function handleEndSession(): void {
+    resetCombos()
+    endSession()
+  }
+
+  function handleDisciplineSelect(discipline: Discipline): void {
+    setSelectedDiscipline(discipline)
+  }
+
   return (
     <section className="train-screen">
       <SessionStatus status={status} />
@@ -51,6 +77,11 @@ export default function Train() {
           onPresetSelect={handlePresetSelect}
         />
       ) : null}
+      <DisciplineSelector
+        disciplines={disciplines}
+        currentDiscipline={selectedDiscipline}
+        onDisciplineSelect={handleDisciplineSelect}
+      />
       <TimerPanel timer={timer} />
 
       <ComboPanel
@@ -66,9 +97,9 @@ export default function Train() {
 
       <TrainingControls
         startButtonLabel={startButtonLabel}
-        onStart={startSession}
+        onStart={handleStartSession}
         onPause={pauseSession}
-        onEnd={endSession}
+        onEnd={handleEndSession}
         canPause={canPause}
         canEnd={canEnd}
       />

@@ -10,5 +10,6 @@ export type Technique = {
 export type Combo = {
   id: string
   name: string
+  discipline: Discipline
   actions: string[]
 }
