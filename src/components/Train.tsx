@@ -8,14 +8,13 @@ import ComboPanel from './ComboPanel'
 import TrainingControls from './TrainingControls'
 import SessionStatus from './SessionStatus'
 import { starterCombos } from '../data/starterCombo'
-import { formatCombo } from '../utils/combo'
+import { formatCombo, getCombosByDiscipline } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { usePresetSelection } from '../hooks/usePresetSelection'
+import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import type { Discipline } from '../types/core'
-import { useState } from 'react'
 import DisciplineSelector from './DisciplineSelector'
-
-const disciplines: Discipline[] = ['boxing', 'kickboxing', 'muay-thai']
+import { availableDisciplines } from '../data/availableDisciplines'
 
 export default function Train() {
   const { selectedPresetId, selectedPreset, selectPreset } =
@@ -28,12 +27,10 @@ export default function Train() {
     endSession,
     resetSession,
   } = useTrainingTimer(selectedPreset.config)
-  const [selectedDiscipline, setSelectedDiscipline] =
-    useState<Discipline>('boxing')
 
-  const availableCombos = starterCombos.filter(
-    (combo) => combo.discipline === selectedDiscipline,
-  )
+  const { selectDiscipline, selectedDiscipline, availableCombos } =
+    useDisciplineSelection(starterCombos, availableDisciplines[0])
+
   const { currentCombo, upcomingCombo, resetCombos } =
     useComboRotation(availableCombos)
 
@@ -52,17 +49,19 @@ export default function Train() {
   }
 
   function handleStartSession(): void {
-    resetCombos()
+    resetCombos(availableCombos)
     startSession()
   }
 
   function handleEndSession(): void {
-    resetCombos()
+    resetCombos(availableCombos)
     endSession()
   }
 
   function handleDisciplineSelect(discipline: Discipline): void {
-    setSelectedDiscipline(discipline)
+    const nextCombos = getCombosByDiscipline(discipline, starterCombos)
+    selectDiscipline(discipline)
+    resetCombos(nextCombos)
   }
 
   return (
@@ -70,18 +69,21 @@ export default function Train() {
       <SessionStatus status={status} />
 
       {isSetup ? (
-        <PresetSelector
-          presets={timerPresets}
-          selectedPresetId={selectedPresetId}
-          canChangePreset={canChangePreset}
-          onPresetSelect={handlePresetSelect}
-        />
+        <>
+          <PresetSelector
+            presets={timerPresets}
+            selectedPresetId={selectedPresetId}
+            canChangePreset={canChangePreset}
+            onPresetSelect={handlePresetSelect}
+          />
+          <DisciplineSelector
+            disciplines={availableDisciplines}
+            currentDiscipline={selectedDiscipline}
+            onDisciplineSelect={handleDisciplineSelect}
+          />
+        </>
       ) : null}
-      <DisciplineSelector
-        disciplines={disciplines}
-        currentDiscipline={selectedDiscipline}
-        onDisciplineSelect={handleDisciplineSelect}
-      />
+
       <TimerPanel timer={timer} />
 
       <ComboPanel

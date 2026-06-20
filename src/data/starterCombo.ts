@@ -26,7 +26,7 @@ export const starterCombos: Combo[] = [
     actions: ['Lead Jab', 'Rear Cross', 'Lead Kick'],
   },
   {
-    id: 'muai-thai-1',
+    id: 'muay-thai-1',
     name: 'Cross Hook Knee',
     discipline: 'muay-thai',
     actions: ['Rear Cross', 'Lead Hook', 'Rear Knee'],

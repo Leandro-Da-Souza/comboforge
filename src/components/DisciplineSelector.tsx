@@ -13,7 +13,7 @@ export default function DisciplineSelector({
   onDisciplineSelect,
 }: DisciplineSelectorProps) {
   return (
-    <section className="discipline-selector">
+    <section className="discipline-selector" aria-label="Discipline">
       {disciplines.map((discipline) => (
         <Button
           key={discipline}

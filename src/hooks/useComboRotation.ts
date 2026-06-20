@@ -5,7 +5,7 @@ type ComboRotation = {
   currentCombo: Combo | undefined
   upcomingCombo: Combo | undefined
   rotateCombo: () => void
-  resetCombos: () => void
+  resetCombos: (nextCombos: Combo[]) => void
 }
 
 function getNextCombo(combos: Combo[]): Combo | undefined {
@@ -28,9 +28,9 @@ export function useComboRotation(combos: Combo[]): ComboRotation {
     setUpcomingCombo(getNextCombo(combos))
   }
 
-  function resetCombos() {
-    setCurrentCombo(combos[0])
-    setUpcomingCombo(combos[1] ?? combos[0])
+  function resetCombos(nextCombos: Combo[]) {
+    setCurrentCombo(nextCombos[0])
+    setUpcomingCombo(nextCombos[1] ?? nextCombos[0])
   }
 
   return {
