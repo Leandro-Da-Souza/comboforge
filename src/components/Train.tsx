@@ -15,6 +15,7 @@ import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import type { Discipline } from '../types/core'
 import DisciplineSelector from './DisciplineSelector'
 import { availableDisciplines } from '../data/availableDisciplines'
+import { useEffect } from 'react'
 
 export default function Train() {
   const { selectedPresetId, selectedPreset, selectPreset } =
@@ -31,7 +32,7 @@ export default function Train() {
   const { selectDiscipline, selectedDiscipline, availableCombos } =
     useDisciplineSelection(starterCombos, availableDisciplines[0])
 
-  const { currentCombo, upcomingCombo, resetCombos } =
+  const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
     useComboRotation(availableCombos)
 
   const startButtonLabel =
@@ -63,6 +64,19 @@ export default function Train() {
     selectDiscipline(discipline)
     resetCombos(nextCombos)
   }
+
+  useEffect(() => {
+    if (status !== 'running') return
+    if (availableCombos.length === 0) return
+
+    const intervalId = window.setInterval(() => {
+      rotateCombo()
+    }, 3500)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [status, availableCombos.length, rotateCombo])
 
   return (
     <section className="train-screen">

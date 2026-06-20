@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import type { Combo, Discipline } from '../types/core'
 import { getCombosByDiscipline } from '../utils/combo'
 
@@ -8,7 +8,11 @@ export function useDisciplineSelection(
 ) {
   const [selectedDiscipline, setSelectedDiscipline] =
     useState<Discipline>(initialDiscipline)
-  const availableCombos = getCombosByDiscipline(selectedDiscipline, combos)
+
+  const availableCombos = useMemo(
+    () => getCombosByDiscipline(selectedDiscipline, combos),
+    [selectedDiscipline, combos],
+  )
 
   function selectDiscipline(discipline: Discipline) {
     setSelectedDiscipline(discipline)

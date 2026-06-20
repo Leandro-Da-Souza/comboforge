@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import type { Combo } from '../types/core'
 
 type ComboRotation = {
@@ -23,10 +23,10 @@ export function useComboRotation(combos: Combo[]): ComboRotation {
     () => combos[1] ?? combos[0],
   )
 
-  function rotateCombo() {
+  const rotateCombo = useCallback(() => {
     setCurrentCombo(upcomingCombo)
     setUpcomingCombo(getNextCombo(combos))
-  }
+  }, [combos, upcomingCombo])
 
   function resetCombos(nextCombos: Combo[]) {
     setCurrentCombo(nextCombos[0])
