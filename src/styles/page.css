@@ -21,13 +21,6 @@
   text-transform: uppercase;
 }
 
-.page-eyebrow {
-  color: var(--muted-foreground);
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .page-header h1 {
   color: var(--primary);
   font-family: var(--ff-display);

@@ -4,73 +4,16 @@
   gap: 24px;
 }
 
-.train-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.eyebrow,
-.round-label,
-.combo-label {
-  color: var(--muted-foreground);
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.train-header h1 {
-  color: var(--primary);
-  font-family: var(--ff-display);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.session-status {
-  color: var(--muted-foreground);
-}
-
 .preset-selector {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
-.timer-panel {
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.timer-display {
-  color: var(--foreground);
-  font-family: var(--ff-mono);
-  font-size: 72px;
-  line-height: 1;
-  font-weight: 700;
-}
-
-.combo-panel {
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.combo-panel h2 {
-  margin-top: 8px;
-  color: var(--foreground);
-  font-family: var(--ff-display);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.upcoming-combo {
-  margin-top: 12px;
-  color: var(--muted-foreground);
+.discipline-selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .training-controls {

@@ -1,5 +1,6 @@
 import type { TimerState } from '../types/timer'
 import { formatTime } from '../utils/time'
+import '../styles/timer-panel.css'
 
 type TimerPanelProps = {
   timer: TimerState

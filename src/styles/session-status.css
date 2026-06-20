@@ -1,0 +1,9 @@
+.session-status-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session-status {
+  color: var(--muted-foreground);
+}

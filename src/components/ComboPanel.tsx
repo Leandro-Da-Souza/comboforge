@@ -1,3 +1,5 @@
+import '../styles/combo-panel.css'
+
 type ComboPanelProps = {
   currentCombo: string
   upcomingCombo: string
