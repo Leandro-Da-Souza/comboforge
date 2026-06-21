@@ -4,7 +4,7 @@ import '../styles/navigation.css'
 export default function Navigation() {
   return (
     <nav className="bottom-nav" aria-label="Primary Navigation">
-      <NavLink to="/train">
+      <NavLink to="/">
         <span>Train</span>
       </NavLink>
       <NavLink to="/combos">

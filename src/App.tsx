@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router'
+import HomePage from './pages/HomePage'
 import TrainPage from './pages/TrainPage'
 import CombosPage from './pages/CombosPage'
 import HistoryPage from './pages/HistoryPage'
@@ -9,7 +10,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/train" replace />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/train" element={<TrainPage />} />
         <Route path="/combos" element={<CombosPage />} />
         <Route path="/history" element={<HistoryPage />} />
