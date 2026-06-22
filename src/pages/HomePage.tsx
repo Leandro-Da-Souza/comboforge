@@ -11,6 +11,8 @@ import { starterCombos } from '../data/starterCombo'
 import type { TimerPreset } from '../types/timer'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import type { Discipline } from '../types/core'
+import { formatTime } from '../utils/time'
+import '../styles/home.css'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
@@ -24,7 +26,7 @@ export default function HomePage() {
   const navigate = useNavigate()
 
   function handleTrainNavigation() {
-    navigate('/train', {
+    void navigate('/train', {
       state: {
         selectedDiscipline,
         selectedPreset,
@@ -41,25 +43,71 @@ export default function HomePage() {
   }
 
   return (
-    <>
-      <PageHeader
-        title={appConfig.name}
-        description="All Combos, No Bullshit"
-      />
-      <PresetSelector
-        presets={timerPresets}
-        selectedPresetId={selectedPresetId}
-        canChangePreset={true}
-        onPresetSelect={handlePresetSelect}
-      />
-      <DisciplineSelector
-        disciplines={availableDisciplines}
-        currentDiscipline={selectedDiscipline}
-        onDisciplineSelect={handleDisciplineSelect}
-      />
-      <Button variant="primary" onClick={handleTrainNavigation}>
-        Quick Start
-      </Button>
-    </>
+    <section className="home-screen">
+      <div className="home-hero">
+        <PageHeader
+          eyebrow="Guest Mode"
+          title={appConfig.name}
+          description="All combos, no bullshit. Pick a setup and get moving."
+        />
+
+        <div className="home-quick-start">
+          <div>
+            <p className="home-kicker">Quick Start</p>
+            <h2>{selectedPreset.name}</h2>
+          </div>
+
+          <dl className="home-session-summary">
+            <div>
+              <dt>Discipline</dt>
+              <dd>{selectedDiscipline}</dd>
+            </div>
+            <div>
+              <dt>Rounds</dt>
+              <dd>{selectedPreset.config.totalRounds}</dd>
+            </div>
+            <div>
+              <dt>Round</dt>
+              <dd>{formatTime(selectedPreset.config.roundDurationSeconds)}</dd>
+            </div>
+            <div>
+              <dt>Rest</dt>
+              <dd>{formatTime(selectedPreset.config.restDurationSeconds)}</dd>
+            </div>
+          </dl>
+
+          <Button
+            className="home-start-button"
+            variant="primary"
+            onClick={handleTrainNavigation}
+          >
+            Start Training
+          </Button>
+        </div>
+      </div>
+
+      <div className="home-setup">
+        <div className="home-section-heading">
+          <p className="home-kicker">Preset</p>
+          <h2>Choose the round format</h2>
+        </div>
+        <PresetSelector
+          presets={timerPresets}
+          selectedPresetId={selectedPresetId}
+          canChangePreset={true}
+          onPresetSelect={handlePresetSelect}
+        />
+
+        <div className="home-section-heading">
+          <p className="home-kicker">Discipline</p>
+          <h2>Choose the combo source</h2>
+        </div>
+        <DisciplineSelector
+          disciplines={availableDisciplines}
+          currentDiscipline={selectedDiscipline}
+          onDisciplineSelect={handleDisciplineSelect}
+        />
+      </div>
+    </section>
   )
 }

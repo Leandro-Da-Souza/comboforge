@@ -11,6 +11,7 @@ import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import { useEffect } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
+import { trainingConfig } from '../config/training.config'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -56,7 +57,7 @@ export default function Train({
 
     const intervalId = window.setInterval(() => {
       rotateCombo()
-    }, 3500)
+    }, trainingConfig.comboRotationIntervalMs)
 
     return () => {
       window.clearInterval(intervalId)

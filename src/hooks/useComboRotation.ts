@@ -8,10 +8,17 @@ type ComboRotation = {
   resetCombos: (nextCombos: Combo[]) => void
 }
 
-function getNextCombo(combos: Combo[]): Combo | undefined {
+function getNextCombo(
+  combos: Combo[],
+  currentCombo?: Combo,
+): Combo | undefined {
   if (combos.length === 0) return undefined
-  const randomIndex = Math.floor(Math.random() * combos.length)
-  return combos[randomIndex]
+
+  const available = combos.filter((combo) => combo.id !== currentCombo?.id)
+
+  const pool = available.length > 0 ? available : combos
+
+  return pool[Math.floor(Math.random() * pool.length)]
 }
 
 export function useComboRotation(combos: Combo[]): ComboRotation {
@@ -25,7 +32,7 @@ export function useComboRotation(combos: Combo[]): ComboRotation {
 
   const rotateCombo = useCallback(() => {
     setCurrentCombo(upcomingCombo)
-    setUpcomingCombo(getNextCombo(combos))
+    setUpcomingCombo(getNextCombo(combos, upcomingCombo))
   }, [combos, upcomingCombo])
 
   function resetCombos(nextCombos: Combo[]) {
