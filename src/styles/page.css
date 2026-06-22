@@ -16,9 +16,28 @@
   display: flex;
   align-items: center;
   color: var(--muted-foreground);
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.account-label {
+  font-size: 14px;
+}
+
+.page-back-button {
+  padding: 8px;
+  margin: -8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+}
+.page-back-button:hover,
+.page-back-button:focus-visible {
+  color: var(--primary);
 }
 
 .page-header h1 {

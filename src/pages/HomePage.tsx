@@ -46,9 +46,9 @@ export default function HomePage() {
     <section className="home-screen">
       <div className="home-hero">
         <PageHeader
-          eyebrow="Guest Mode"
+          eyebrow="All Combos, No Bullshit"
           title={appConfig.name}
-          description="All combos, no bullshit. Pick a setup and get moving."
+          accountLabel="Guest Mode"
         />
 
         <div className="home-quick-start">

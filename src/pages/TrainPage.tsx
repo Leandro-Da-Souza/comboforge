@@ -23,9 +23,9 @@ export default function TrainPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Guest Mode"
+        eyebrow="Ready, Set, Hiya!"
         title={appConfig.name}
-        description="Wrap Up, Step Up"
+        backHref="/"
       />
       <Train
         selectedDiscipline={selectedDiscipline}

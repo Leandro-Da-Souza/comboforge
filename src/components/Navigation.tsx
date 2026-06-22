@@ -1,20 +1,21 @@
 import { NavLink } from 'react-router'
 import '../styles/navigation.css'
+import { Zap, ScrollText, History, Settings } from 'lucide-react'
 
 export default function Navigation() {
   return (
     <nav className="bottom-nav" aria-label="Primary Navigation">
       <NavLink to="/">
-        <span>Train</span>
+        <Zap />
       </NavLink>
       <NavLink to="/combos">
-        <span>Combos</span>
+        <ScrollText />
       </NavLink>
       <NavLink to="/history">
-        <span>History</span>
+        <History />
       </NavLink>
       <NavLink to="/settings">
-        <span>Settings</span>
+        <Settings />
       </NavLink>
     </nav>
   )
