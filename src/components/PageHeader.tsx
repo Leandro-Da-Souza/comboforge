@@ -1,12 +1,13 @@
 import { MoveLeft } from 'lucide-react'
 import '../styles/page.css'
-import { useNavigate } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 
 type PageHeaderProps = {
   eyebrow?: string
   title: string
   description?: string
   accountLabel?: string
+  accountHref?: string
   backHref?: string
 }
 
@@ -15,6 +16,7 @@ export default function PageHeader({
   title,
   description,
   accountLabel,
+  accountHref,
   backHref,
 }: PageHeaderProps) {
   const navigate = useNavigate()
@@ -42,7 +44,11 @@ export default function PageHeader({
                 <MoveLeft aria-hidden="true" size={22} />
               </button>
             ) : accountLabel ? (
-              accountLabel
+              accountHref ? (
+                <NavLink to={accountHref}>{accountLabel}</NavLink>
+              ) : (
+                accountLabel
+              )
             ) : null}
           </span>
         </div>

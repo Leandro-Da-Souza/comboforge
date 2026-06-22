@@ -25,6 +25,16 @@
   font-size: 14px;
 }
 
+.account-label a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.account-label a:hover,
+.account-label a:focus-visible {
+  color: var(--primary);
+}
+
 .page-back-button {
   padding: 8px;
   margin: -8px;

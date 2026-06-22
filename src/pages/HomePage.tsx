@@ -13,6 +13,7 @@ import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import type { Discipline } from '../types/core'
 import { formatTime } from '../utils/time'
 import '../styles/home.css'
+import type { SessionSetup } from '../types/session'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
@@ -25,12 +26,14 @@ export default function HomePage() {
 
   const navigate = useNavigate()
 
+  const sessionSetup: SessionSetup = {
+    selectedDiscipline,
+    selectedPreset,
+  }
+
   function handleTrainNavigation() {
     void navigate('/train', {
-      state: {
-        selectedDiscipline,
-        selectedPreset,
-      },
+      state: sessionSetup,
     })
   }
 
@@ -49,6 +52,7 @@ export default function HomePage() {
           eyebrow="All Combos, No Bullshit"
           title={appConfig.name}
           accountLabel="Guest Mode"
+          accountHref="/settings"
         />
 
         <div className="home-quick-start">
