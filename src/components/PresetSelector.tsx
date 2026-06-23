@@ -1,3 +1,4 @@
+import '../styles/preset.css'
 import type { TimerPreset } from '../types/timer'
 import Button from './ui/Button'
 
