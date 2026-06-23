@@ -10,14 +10,16 @@ import type { TimerPreset } from '../types/timer'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import '../styles/home.css'
 import type { SessionSetup } from '../types/session'
-import { NavLink } from 'react-router'
 import QuickStart from '../components/QuickStart'
+import Select from '../components/ui/Select'
+import type { Discipline } from '../types/core'
+import { NavLink } from 'react-router'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
     usePresetSelection(timerPresets)
 
-  const { selectedDiscipline } = useDisciplineSelection(
+  const { selectDiscipline, selectedDiscipline } = useDisciplineSelection(
     starterCombos,
     availableDisciplines[0],
   )
@@ -39,6 +41,10 @@ export default function HomePage() {
     selectPreset(preset)
   }
 
+  function handleDisciplineSelect(discipline: Discipline) {
+    selectDiscipline(discipline)
+  }
+
   return (
     <section className="home-screen">
       <div className="home-hero">
@@ -52,7 +58,7 @@ export default function HomePage() {
         <QuickStart
           selectedPreset={selectedPreset}
           selectedDiscipline={selectedDiscipline}
-          handleTrainNavigation={handleTrainNavigation}
+          onStart={handleTrainNavigation}
         />
       </div>
 
@@ -60,6 +66,17 @@ export default function HomePage() {
         <div className="home-section-heading">
           <p className="home-kicker">Preset</p>
           <NavLink to="/combos">Custom -&gt;</NavLink>
+          <Select
+            label="Discipline"
+            value={selectedDiscipline}
+            options={availableDisciplines.map((discipline) => ({
+              label: discipline,
+              value: discipline,
+            }))}
+            onChange={(event) => {
+              handleDisciplineSelect(event.target.value as Discipline)
+            }}
+          />
         </div>
         <PresetSelector
           presets={timerPresets}

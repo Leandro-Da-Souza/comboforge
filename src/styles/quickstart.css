@@ -72,3 +72,9 @@
   line-height: 1;
   text-transform: uppercase;
 }
+
+@media (min-width: 720px) {
+  .session-summary {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

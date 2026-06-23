@@ -7,13 +7,13 @@ import '../styles/quickstart.css'
 type QuickStartProps = {
   selectedPreset: TimerPreset
   selectedDiscipline: Discipline
-  handleTrainNavigation: () => void
+  onStart: () => void
 }
 
 export default function QuickStart({
   selectedPreset,
   selectedDiscipline,
-  handleTrainNavigation,
+  onStart,
 }: QuickStartProps) {
   return (
     <div className="quick-start">
@@ -41,11 +41,7 @@ export default function QuickStart({
         </div>
       </dl>
 
-      <Button
-        className="start-button"
-        variant="primary"
-        onClick={handleTrainNavigation}
-      >
+      <Button className="start-button" variant="primary" onClick={onStart}>
         Start Training
       </Button>
     </div>
