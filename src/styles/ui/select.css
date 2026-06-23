@@ -1,0 +1,24 @@
+.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.select-field span {
+  color: var(--muted-foreground);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.select-control {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 36px 0 12px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+}
