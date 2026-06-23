@@ -79,23 +79,25 @@
   --shadow-glow: 0 0 44px rgba(239, 51, 71, 0.24);
 }
 
-:root[data-theme='muaythai'] .page-header h1,
-:root[data-theme='muaythai'] .quick-start h2,
-:root[data-theme='muaythai'] .home-kicker {
-  font-weight: 700;
+/*Muay thai override*/
+:root[data-theme='muaythai'] .page-header h1 {
+  font-size: clamp(1.75rem, 9vw, 2.75rem);
   letter-spacing: 0.02em;
 }
 
-:root[data-theme='muaythai'] .page-header h1 {
-  font-size: clamp(1.75rem, 9vw, 2.75rem);
+:root[data-theme='muaythai'] .quick-start h2,
+:root[data-theme='muaythai'] .home-kicker {
+  font-family: var(--ff-sans);
+  letter-spacing: 0;
 }
 
 :root[data-theme='muaythai'] .quick-start h2 {
-  font-size: clamp(2.8rem, 15vw, 4.6rem);
+  font-size: clamp(2.8rem, 15vw, 4.9rem);
 }
 
 :root[data-theme='muaythai'] .quick-start-summary dd {
   font-size: 1.35rem;
+  font-family: var(--ff-sans);
 }
 
 :root[data-theme='muaythai'] .preset-selector-info,
@@ -103,6 +105,13 @@
 :root[data-theme='muaythai'] .select-field span {
   color: #c0a278;
 }
+
+:root[data-theme='muaythai'] .quick-start-button,
+:root[data-theme='muaythai'] .combo-panel h2 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+}
+/*end*/
 
 :root[data-theme='poster'] .page-header h1,
 :root[data-theme='poster'] .quick-start h2,
