@@ -15,7 +15,7 @@
 .combo-panel h2 {
   margin-top: 8px;
   color: var(--foreground);
-  font-family: var(--ff-display);
+  font-family: var(--ff-sans);
   font-size: 32px;
   font-weight: 700;
   line-height: 1.1;

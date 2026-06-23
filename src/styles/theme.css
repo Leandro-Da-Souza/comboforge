@@ -89,6 +89,7 @@
 :root[data-theme='muaythai'] .home-kicker {
   font-family: var(--ff-sans);
   letter-spacing: 0;
+  font-size: 1.15rem;
 }
 
 :root[data-theme='muaythai'] .quick-start h2 {
@@ -106,10 +107,10 @@
   color: #c0a278;
 }
 
-:root[data-theme='muaythai'] .quick-start-button,
-:root[data-theme='muaythai'] .combo-panel h2 {
-  font-family: var(--ff-display);
+:root[data-theme='muaythai'] .quick-start-button {
+  font-family: var(--ff-sans);
   font-weight: 600;
+  font-size: 1.35rem;
 }
 /*end*/
 
