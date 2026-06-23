@@ -3,6 +3,7 @@ import Button from './ui/Button'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import '../styles/quickstart.css'
+import { formatDiscipline } from '../utils/discipline'
 
 type QuickStartProps = {
   selectedPreset: TimerPreset
@@ -25,7 +26,7 @@ export default function QuickStart({
       <dl className="quick-start-summary">
         <div>
           <dt>Discipline</dt>
-          <dd>{selectedDiscipline}</dd>
+          <dd>{formatDiscipline(selectedDiscipline)}</dd>
         </div>
         <div>
           <dt>Rounds</dt>

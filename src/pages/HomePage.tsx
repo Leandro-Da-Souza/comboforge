@@ -14,6 +14,7 @@ import QuickStart from '../components/QuickStart'
 import Select from '../components/ui/Select'
 import type { Discipline } from '../types/core'
 import { NavLink } from 'react-router'
+import { formatDiscipline } from '../utils/discipline'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
@@ -70,7 +71,7 @@ export default function HomePage() {
             label="Discipline"
             value={selectedDiscipline}
             options={availableDisciplines.map((discipline) => ({
-              label: discipline,
+              label: formatDiscipline(discipline),
               value: discipline,
             }))}
             onChange={(event) => {

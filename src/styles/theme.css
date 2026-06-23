@@ -81,7 +81,7 @@
 
 /*Muay thai override*/
 :root[data-theme='muaythai'] .page-header h1 {
-  font-size: clamp(1.75rem, 9vw, 2.75rem);
+  font-size: clamp(1.4rem, 9vw, 2.4rem);
   letter-spacing: 0.02em;
 }
 
@@ -93,7 +93,7 @@
 }
 
 :root[data-theme='muaythai'] .quick-start h2 {
-  font-size: clamp(2.8rem, 15vw, 4.9rem);
+  font-size: clamp(2rem, 15vw, 3.5rem);
 }
 
 :root[data-theme='muaythai'] .quick-start-summary dd {
@@ -112,6 +112,8 @@
   font-weight: 600;
   font-size: 1.35rem;
 }
+
+:root[data-theme='muaythai'] .page
 /*end*/
 
 :root[data-theme='poster'] .page-header h1,
