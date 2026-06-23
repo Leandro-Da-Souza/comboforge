@@ -18,11 +18,11 @@ export default function QuickStart({
   return (
     <div className="quick-start">
       <div>
-        <p className="kicker">Quick Start</p>
+        <p className="quick-start-kicker">Quick Start</p>
         <h2>{selectedPreset.name}</h2>
       </div>
 
-      <dl className="session-summary">
+      <dl className="quick-start-summary">
         <div>
           <dt>Discipline</dt>
           <dd>{selectedDiscipline}</dd>
@@ -41,7 +41,11 @@ export default function QuickStart({
         </div>
       </dl>
 
-      <Button className="start-button" variant="primary" onClick={onStart}>
+      <Button
+        className="quick-start-button"
+        variant="primary"
+        onClick={onStart}
+      >
         Start Training
       </Button>
     </div>

@@ -15,15 +15,22 @@
 }
 
 .select-control {
+  width: 100%;
   min-height: 44px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0 36px 0 12px;
   background: var(--surface);
   color: var(--foreground);
+  cursor: pointer;
   font: inherit;
+  font-family: var(--ff-sans);
   font-weight: 700;
   text-transform: capitalize;
+}
+
+.select-control:hover {
+  border-color: color-mix(in srgb, var(--primary) 70%, var(--border));
 }
 
 .select-control:focus-visible {

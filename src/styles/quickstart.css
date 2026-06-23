@@ -1,4 +1,4 @@
-.kicker {
+.quick-start-kicker {
   margin: 0;
   color: var(--primary);
   font-family: var(--ff-mono);
@@ -8,12 +8,12 @@
   text-transform: uppercase;
 }
 
-.quick-start h2,
-.section-heading h2 {
-  margin: 0;
+.quick-start h2 {
+  margin: 6px 0 0;
   color: var(--foreground);
   font-family: var(--ff-display);
   line-height: 1;
+  font-size: clamp(2.25rem, 18vw, 5rem);
 }
 
 .quick-start {
@@ -26,19 +26,14 @@
   background: var(--surface);
 }
 
-.quick-start h2 {
-  margin-top: 6px;
-  font-size: clamp(2.25rem, 18vw, 5rem);
-}
-
-.session-summary {
+.quick-start-summary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin: 0;
 }
 
-.session-summary div {
+.quick-start-summary div {
   min-width: 0;
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 0.75);
@@ -46,7 +41,7 @@
   background: var(--muted);
 }
 
-.session-summary dt {
+.quick-start-summary dt {
   color: var(--muted-foreground);
   font-family: var(--ff-mono);
   font-size: 10px;
@@ -55,7 +50,7 @@
   text-transform: uppercase;
 }
 
-.session-summary dd {
+.quick-start-summary dd {
   margin: 6px 0 0;
   overflow-wrap: anywhere;
   color: var(--foreground);
@@ -65,7 +60,7 @@
   text-transform: uppercase;
 }
 
-.start-button {
+.quick-start-button {
   min-height: 64px;
   font-family: var(--ff-display);
   font-size: 1.75rem;
@@ -74,7 +69,7 @@
 }
 
 @media (min-width: 720px) {
-  .session-summary {
+  .quick-start-summary {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
