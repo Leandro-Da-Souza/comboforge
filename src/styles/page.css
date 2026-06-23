@@ -53,7 +53,9 @@
 .page-header h1 {
   color: var(--primary);
   font-family: var(--ff-display);
+  font-size: clamp(2rem, 12vw, 3.25rem);
   line-height: 1;
+  text-transform: uppercase;
 }
 
 .page-description {

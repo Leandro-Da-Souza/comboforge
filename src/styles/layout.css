@@ -8,6 +8,9 @@
   background-image: var(--background);
   color: var(--foreground);
   font-family: var(--ff-sans);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 .layout-content {

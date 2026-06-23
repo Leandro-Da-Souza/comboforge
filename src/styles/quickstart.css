@@ -13,7 +13,8 @@
   color: var(--foreground);
   font-family: var(--ff-display);
   line-height: 1;
-  font-size: clamp(2.25rem, 18vw, 5rem);
+  font-size: clamp(3.25rem, 19vw, 5.75rem);
+  text-transform: uppercase;
 }
 
 .quick-start {
@@ -23,7 +24,14 @@
   border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--border));
   border-radius: var(--radius);
   padding: 20px;
-  background: var(--surface);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-2) 58%, transparent),
+      transparent
+    ),
+    var(--surface);
+  box-shadow: var(--shadow-glow, none);
 }
 
 .quick-start-summary {
@@ -38,7 +46,7 @@
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 0.75);
   padding: 12px;
-  background: var(--muted);
+  background: color-mix(in srgb, var(--muted) 82%, transparent);
 }
 
 .quick-start-summary dt {

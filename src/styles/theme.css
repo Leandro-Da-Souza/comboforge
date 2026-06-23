@@ -1,72 +1,114 @@
 /* ============ THEME: TRADITIONAL MUAY THAI ============ */
 :root[data-theme='muaythai'] {
   --radius: 0.5rem;
-  --canvas: #1a0a08;
+  --canvas: #180806;
   --background:
     radial-gradient(
-      circle at 50% 0%,
-      rgba(201, 162, 76, 0.08),
+      circle at 50% -10%,
+      rgba(207, 167, 76, 0.14),
       transparent 60%
     ),
     radial-gradient(
-      circle at 50% 100%,
-      rgba(201, 162, 76, 0.05),
-      transparent 50%
+      circle at 10% 100%,
+      rgba(102, 33, 24, 0.34),
+      transparent 48%
     );
-  --foreground: #f1e6c8;
-  --surface: #221110;
-  --surface-2: #2b1715;
-  --border: #3a2218;
-  --muted: #1f0d0b;
-  --muted-foreground: #8a7256;
-  --primary: #c9a24c;
-  --primary-foreground: #1a0a08;
+  --foreground: #f4ead0;
+  --surface: #2a0f0d;
+  --surface-2: #321612;
+  --border: #5a3721;
+  --muted: #220c0a;
+  --muted-foreground: #a88961;
+  --primary: #d0aa4f;
+  --primary-foreground: #1b0b07;
   --ff-display: 'Cinzel', 'Cormorant Garamond', serif;
   --ff-sans: 'Inter', sans-serif;
   --ff-mono: 'JetBrains Mono', monospace;
+  --shadow-glow: 0 0 50px rgba(208, 170, 79, 0.22);
 }
 
 /* ============ THEME: FIGHT PROMOTION POSTER ============ */
 :root[data-theme='poster'] {
   --radius: 0.25rem;
-  --canvas: #0d0b08;
+  --canvas: #0b0906;
   --background:
     repeating-linear-gradient(
       0deg,
-      rgba(245, 236, 214, 0.025) 0 1px,
-      transparent 1px 3px
+      rgba(245, 236, 214, 0.035) 0 1px,
+      transparent 1px 4px
     ),
     radial-gradient(
       circle at 30% 20%,
-      rgba(255, 210, 63, 0.06),
+      rgba(255, 210, 63, 0.08),
       transparent 50%
     );
   --foreground: #f5ecd6;
-  --surface: #18140e;
-  --surface-2: #221c13;
-  --border: #3a2f1d;
-  --muted: #18140e;
-  --muted-foreground: #8a7a5a;
+  --surface: #14110b;
+  --surface-2: #1d180f;
+  --border: #4a3a18;
+  --muted: #17130d;
+  --muted-foreground: #9c875a;
   --primary: #ffd23f;
   --primary-foreground: #0d0b08;
   --ff-display: 'Anton', 'Druk', 'League Gothic', sans-serif;
   --ff-sans: 'Inter', sans-serif;
   --ff-mono: 'JetBrains Mono', monospace;
+  --shadow-glow: 0 0 0 1px rgba(255, 210, 63, 0.28);
 }
 /* ============ THEME: BRUTALIST (default) ============ */
+:root,
 :root[data-theme='brutalist'] {
   --radius: 0.75rem;
-  --canvas: #0a0a0a;
-  --background: none;
-  --foreground: #f5f5f5;
-  --surface: #161616;
-  --surface-2: #1f1f1f;
-  --border: #2a2a2a;
-  --muted: #1a1a1a;
-  --muted-foreground: #737373;
-  --primary: #e63946;
+  --canvas: #050505;
+  --background: radial-gradient(
+    circle at 50% -20%,
+    rgba(230, 57, 70, 0.08),
+    transparent 46%
+  );
+  --foreground: #f7f7f2;
+  --surface: #141414;
+  --surface-2: #191919;
+  --border: #2f3030;
+  --muted: #171717;
+  --muted-foreground: #858585;
+  --primary: #ef3347;
   --primary-foreground: #ffffff;
   --ff-display: 'Bebas Neue', sans-serif;
   --ff-sans: 'Inter', sans-serif;
   --ff-mono: 'JetBrains Mono', monospace;
+  --shadow-glow: 0 0 44px rgba(239, 51, 71, 0.24);
+}
+
+:root[data-theme='muaythai'] .page-header h1,
+:root[data-theme='muaythai'] .quick-start h2,
+:root[data-theme='muaythai'] .home-kicker {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+:root[data-theme='muaythai'] .page-header h1 {
+  font-size: clamp(1.75rem, 9vw, 2.75rem);
+}
+
+:root[data-theme='muaythai'] .quick-start h2 {
+  font-size: clamp(2.8rem, 15vw, 4.6rem);
+}
+
+:root[data-theme='muaythai'] .quick-start-summary dd {
+  font-size: 1.35rem;
+}
+
+:root[data-theme='muaythai'] .preset-selector-info,
+:root[data-theme='muaythai'] .quick-start-summary dt,
+:root[data-theme='muaythai'] .select-field span {
+  color: #c0a278;
+}
+
+:root[data-theme='poster'] .page-header h1,
+:root[data-theme='poster'] .quick-start h2,
+:root[data-theme='poster'] .home-kicker,
+:root[data-theme='brutalist'] .page-header h1,
+:root[data-theme='brutalist'] .quick-start h2,
+:root[data-theme='brutalist'] .home-kicker {
+  letter-spacing: 0.01em;
 }

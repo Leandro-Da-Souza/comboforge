@@ -2,12 +2,22 @@
   min-height: 44px;
   border-radius: var(--radius);
   font-weight: 700;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
 }
 
 .button-primary {
   border: 0;
   background: var(--primary);
   color: var(--primary-foreground);
+}
+
+.button-primary:hover:not(:disabled),
+.button-primary:focus-visible {
+  transform: translateY(-1px);
 }
 
 .button-secondary {
