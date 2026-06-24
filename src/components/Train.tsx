@@ -37,7 +37,7 @@ export default function Train({
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
 
-  const canPause = status === 'running'
+  const isRunning = status === 'running'
   const canEnd = status !== 'idle' && status !== 'ended'
   const isSetup = status === 'idle' || status === 'ended'
   const isActiveSession = status === 'running' || status === 'paused'
@@ -91,6 +91,7 @@ export default function Train({
                 ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
                 : 'Rest'
           }
+          availableCombos={availableCombos}
         />
 
         <TrainingControls
@@ -98,7 +99,7 @@ export default function Train({
           onStart={handleStartSession}
           onPause={pauseSession}
           onEnd={handleEndSession}
-          canPause={canPause}
+          isRunning={isRunning}
           canEnd={canEnd}
         />
       </div>

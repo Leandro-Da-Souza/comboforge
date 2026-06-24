@@ -19,6 +19,23 @@
   letter-spacing: 0.08em;
 }
 
+.combo-move-list-button {
+  padding: 6px;
+  margin: -6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.combo-move-list-button:hover,
+.combo-move-list-button:focus-visible {
+  color: var(--primary);
+}
+
 .combo-panel h2 {
   margin-top: 8px;
   color: var(--foreground);
