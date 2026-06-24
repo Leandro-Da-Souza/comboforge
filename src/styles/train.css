@@ -1,7 +1,47 @@
 .train-screen {
+  min-height: calc(100vh - 48px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
+}
+
+.train-timer-zone {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: start;
+  gap: 14px;
+  min-height: 0;
+}
+
+.train-action-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.training-session-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.training-session-meta p {
+  display: flex;
+  gap: 6px;
+}
+
+.training-session-meta span {
+  color: var(--foreground);
+}
+
+.training-session-meta strong {
+  color: var(--primary);
+  font: inherit;
 }
 
 .discipline-selector {
@@ -20,4 +60,10 @@
   min-height: 48px;
   flex: 1;
   font-weight: 700;
+}
+
+@media (min-width: 720px) {
+  .train-screen {
+    min-height: calc(100vh - 64px);
+  }
 }

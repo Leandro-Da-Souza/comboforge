@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import { trainingConfig } from '../config/training.config'
+import TrainingSessionMeta from './TrainingSessionMeta'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -66,28 +67,33 @@ export default function Train({
 
   return (
     <section className="train-screen">
-      <TimerPanel timer={timer} discipline={selectedDiscipline} />
-      <SessionStatus status={status} />
+      <div className="train-timer-zone">
+        <TrainingSessionMeta discipline={selectedDiscipline} timer={timer} />
+        <TimerPanel timer={timer} />
+        <SessionStatus status={status} />
+      </div>
 
-      <ComboPanel
-        currentCombo={
-          isSetup ? 'Tap Start' : formatCombo(currentCombo?.actions ?? [])
-        }
-        upcomingCombo={
-          isActiveSession
-            ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
-            : 'Rest'
-        }
-      />
+      <div className="train-action-zone">
+        <ComboPanel
+          currentCombo={
+            isSetup ? 'Tap Start' : formatCombo(currentCombo?.actions ?? [])
+          }
+          upcomingCombo={
+            isActiveSession
+              ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
+              : 'Rest'
+          }
+        />
 
-      <TrainingControls
-        startButtonLabel={startButtonLabel}
-        onStart={handleStartSession}
-        onPause={pauseSession}
-        onEnd={handleEndSession}
-        canPause={canPause}
-        canEnd={canEnd}
-      />
+        <TrainingControls
+          startButtonLabel={startButtonLabel}
+          onStart={handleStartSession}
+          onPause={pauseSession}
+          onEnd={handleEndSession}
+          canPause={canPause}
+          canEnd={canEnd}
+        />
+      </div>
     </section>
   )
 }

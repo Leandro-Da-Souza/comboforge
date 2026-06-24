@@ -1,19 +1,6 @@
 .timer-panel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.round-label {
-  color: var(--foreground);
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.round-label .separator {
-  color: var(--primary);
 }
 
 .timer-display {
