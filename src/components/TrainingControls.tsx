@@ -1,4 +1,5 @@
 import Button from './ui/Button'
+import '../styles/training-controls.css'
 
 type TrainingControlsProps = {
   startButtonLabel: string
@@ -19,25 +20,23 @@ export default function TrainingControls({
 }: TrainingControlsProps) {
   return (
     <section className="training-controls">
-      <Button variant="primary" type="button" onClick={onStart}>
-        {startButtonLabel}
-      </Button>
-      <Button
-        variant="secondary"
-        type="button"
-        onClick={onPause}
-        disabled={!canPause}
-      >
-        Pause
-      </Button>
-      <Button
-        variant="secondary"
-        type="button"
-        onClick={onEnd}
-        disabled={!canEnd}
-      >
-        End
-      </Button>
+      {!canPause ? (
+        <Button variant="primary" type="button" onClick={onStart}>
+          {startButtonLabel}
+        </Button>
+      ) : null}
+
+      {canPause ? (
+        <Button variant="secondary" type="button" onClick={onPause}>
+          Pause
+        </Button>
+      ) : null}
+
+      {canEnd ? (
+        <Button variant="secondary" type="button" onClick={onEnd}>
+          End
+        </Button>
+      ) : null}
     </section>
   )
 }

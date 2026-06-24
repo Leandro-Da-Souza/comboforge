@@ -3,6 +3,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+  border-left: 0.25rem solid var(--primary);
 }
 
 .combo-title {

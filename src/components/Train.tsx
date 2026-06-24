@@ -54,6 +54,7 @@ export default function Train({
 
   useEffect(() => {
     if (status !== 'running') return
+    if (timer.phase !== 'round') return
     if (availableCombos.length === 0) return
 
     const intervalId = window.setInterval(() => {
@@ -63,7 +64,7 @@ export default function Train({
     return () => {
       window.clearInterval(intervalId)
     }
-  }, [status, availableCombos.length, rotateCombo])
+  }, [status, timer.phase, availableCombos.length, rotateCombo])
 
   return (
     <section className="train-screen">
