@@ -16,11 +16,7 @@ export default function TrainPage() {
     state?.selectedDiscipline ?? availableDisciplines[0]
   return (
     <>
-      <PageHeader
-        eyebrow="Ready, Set, Hiya!"
-        title={appConfig.name}
-        backHref="/"
-      />
+      <PageHeader title={appConfig.name} backHref="/" />
       <Train
         selectedDiscipline={selectedDiscipline}
         selectedPreset={selectedPreset}

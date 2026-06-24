@@ -1,9 +1,13 @@
 .session-status-panel {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: center;
 }
 
 .session-status {
-  color: var(--muted-foreground);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  line-height: 1px;
 }

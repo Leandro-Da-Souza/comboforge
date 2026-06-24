@@ -5,11 +5,17 @@
   background: var(--surface);
 }
 
+.combo-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+}
+
 .combo-label {
   color: var(--muted-foreground);
   font-size: 14px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .combo-panel h2 {

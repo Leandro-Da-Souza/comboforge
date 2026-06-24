@@ -1,21 +1,50 @@
 .timer-panel {
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .round-label {
-  color: var(--muted-foreground);
+  color: var(--foreground);
   font-size: 14px;
+  font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+.round-label .separator {
+  color: var(--primary);
+}
+
 .timer-display {
-  color: var(--foreground);
+  width: min(64vw, 240px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
   font-family: var(--ff-sans);
-  font-size: 72px;
+  font-size: clamp(3rem, 16vw, 4.5rem);
   font-weight: 700;
   line-height: 1;
+  text-transform: uppercase;
+}
+
+:root[data-theme='muaythai'] .timer-display {
+  border: 1px solid var(--primary);
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in srgb, var(--primary) 18%, transparent),
+      transparent 62%
+    ),
+    var(--surface);
+  color: var(--foreground);
+}
+
+:root[data-theme='poster'] .timer-display {
+  box-shadow: var(--shadow-glow, none);
 }

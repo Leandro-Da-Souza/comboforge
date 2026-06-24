@@ -66,9 +66,8 @@ export default function Train({
 
   return (
     <section className="train-screen">
+      <TimerPanel timer={timer} discipline={selectedDiscipline} />
       <SessionStatus status={status} />
-
-      <TimerPanel timer={timer} />
 
       <ComboPanel
         currentCombo={
@@ -77,7 +76,7 @@ export default function Train({
         upcomingCombo={
           isActiveSession
             ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
-            : selectedPreset.name
+            : 'Rest'
         }
       />
 

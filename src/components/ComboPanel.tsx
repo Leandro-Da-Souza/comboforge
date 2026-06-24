@@ -11,7 +11,9 @@ export default function ComboPanel({
 }: ComboPanelProps) {
   return (
     <section className="combo-panel">
-      <p className="combo-label">Current Combo</p>
+      <div className="combo-title">
+        <p className="combo-label">Current Combo</p>
+      </div>
       <h2>{currentCombo}</h2>
       <p className="upcoming-combo">{upcomingCombo}</p>
     </section>

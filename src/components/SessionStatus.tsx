@@ -15,7 +15,7 @@ const statusLabel: Record<TrainingStatus, string> = {
 export default function SessionStatus({ status }: SessionStatusProps) {
   return (
     <section className="session-status-panel">
-      <p className="session-status">Status: {statusLabel[status]}</p>
+      <h3 className="session-status">{statusLabel[status]}</h3>
     </section>
   )
 }
