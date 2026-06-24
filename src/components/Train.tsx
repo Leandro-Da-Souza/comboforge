@@ -41,6 +41,7 @@ export default function Train({
   const canEnd = status !== 'idle' && status !== 'ended'
   const isSetup = status === 'idle' || status === 'ended'
   const isActiveSession = status === 'running' || status === 'paused'
+  const isResting = status === 'running' && timer.phase === 'rest'
 
   function handleStartSession(): void {
     resetCombos(availableCombos)
@@ -77,12 +78,18 @@ export default function Train({
       <div className="train-action-zone">
         <ComboPanel
           currentCombo={
-            isSetup ? 'Tap Start' : formatCombo(currentCombo?.actions ?? [])
+            isSetup
+              ? 'Tap Start'
+              : isResting
+                ? 'Rest'
+                : formatCombo(currentCombo?.actions ?? [])
           }
           upcomingCombo={
-            isActiveSession
-              ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
-              : 'Rest'
+            isResting
+              ? 'Next round soon'
+              : isActiveSession
+                ? `Next: ${formatCombo(upcomingCombo?.actions ?? [])}`
+                : 'Rest'
           }
         />
 
