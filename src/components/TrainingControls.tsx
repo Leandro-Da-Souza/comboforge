@@ -33,7 +33,7 @@ export default function TrainingControls({
       ) : null}
 
       {canEnd ? (
-        <Button variant="secondary" type="button" onClick={onEnd}>
+        <Button variant="danger" type="button" onClick={onEnd}>
           End
         </Button>
       ) : null}

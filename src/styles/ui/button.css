@@ -26,6 +26,19 @@
   color: var(--foreground);
 }
 
+.button-danger {
+  border: 1px solid color-mix(in srgb, var(--primary) 55%, var(--border));
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface));
+  color: var(--foreground);
+}
+
+.button-danger:hover:not(:disabled),
+.button-danger:focus-visible {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
 .button-secondary[aria-pressed='true'] {
   border-color: var(--primary);
   color: var(--primary);

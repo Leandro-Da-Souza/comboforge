@@ -1,7 +1,7 @@
 import '../../styles/ui/button.css'
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'danger'
   className?: string
   pressed?: boolean
 }

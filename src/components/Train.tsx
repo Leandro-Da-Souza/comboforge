@@ -42,6 +42,11 @@ export default function Train({
   const isSetup = status === 'idle' || status === 'ended'
   const isActiveSession = status === 'running' || status === 'paused'
   const isResting = status === 'running' && timer.phase === 'rest'
+  const comboKey = isSetup
+    ? `setup-${status}`
+    : isResting
+      ? `rest-${timer.currentRound}`
+      : (currentCombo?.id ?? 'empty-combo')
 
   function handleStartSession(): void {
     resetCombos(availableCombos)
@@ -92,6 +97,7 @@ export default function Train({
                 : 'Rest'
           }
           availableCombos={availableCombos}
+          comboKey={comboKey}
         />
 
         <TrainingControls

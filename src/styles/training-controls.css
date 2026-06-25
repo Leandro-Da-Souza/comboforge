@@ -4,3 +4,7 @@
   font-weight: 700;
   font-size: 1.35rem;
 }
+
+.training-controls .button:only-child {
+  flex-basis: 100%;
+}
