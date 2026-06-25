@@ -4,6 +4,7 @@ import type { Combo } from '../types/core'
 import Modal from './ui/Modal'
 import { ListChecks } from 'lucide-react'
 import { formatCombo } from '../utils/combo'
+import Button from './ui/Button'
 
 type ComboPanelProps = {
   currentCombo: string
@@ -21,32 +22,34 @@ export default function ComboPanel({
     <section className="combo-panel">
       <div className="combo-title">
         <p className="combo-label">Current Combo</p>
-        <button
+        <Button
           type="button"
+          variant="primary"
           className="combo-move-list-button"
           aria-label="Open move list"
           onClick={() => setShowModal(true)}
         >
           <ListChecks aria-hidden="true" size={18} />
-        </button>
+        </Button>
       </div>
       <h2>{currentCombo}</h2>
       <p className="upcoming-combo">{upcomingCombo}</p>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <div className="move-list">
           <header className="move-list-header">
-            <p className="combo-label">Move List</p>
-            <h2>Available Combos</h2>
+            <h3 className="move-list-title">Move List</h3>
           </header>
 
-          <ol className="move-list-items">
+          <ul className="move-list-items">
             {availableCombos.map((combo) => (
-              <li key={combo.id}>
-                <strong>{combo.name}</strong>
+              <li key={combo.id} className="move-list-item">
+                <span>
+                  <strong>{combo.name}</strong>
+                </span>
                 <span>{formatCombo(combo.actions)}</span>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </Modal>
     </section>

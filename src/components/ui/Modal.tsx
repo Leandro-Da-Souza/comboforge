@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import '../../styles/ui/modal.css'
+import Button from './Button'
 
 type ModalProps = {
   show: boolean
@@ -16,11 +17,9 @@ export default function Modal({
   children,
   className,
 }: ModalProps) {
-  if (!show) return null
-
   return createPortal(
     <section
-      className="modal-wrapper"
+      className={`modal-wrapper ${show ? 'show' : ''}`}
       role="dialog"
       aria-modal="true"
       onClick={onClose}
@@ -29,9 +28,15 @@ export default function Modal({
         onClick={(e) => e.stopPropagation()}
         className={`modal ${className ?? ''}`}
       >
-        <button type="button" aria-label="Close modal" onClick={onClose}>
-          <X aria-hidden="true" size={18} />
-        </button>
+        <Button
+          variant="primary"
+          type="button"
+          aria-label="Close modal"
+          onClick={onClose}
+          className="modal-close"
+        >
+          <X aria-hidden="true" size={16} />
+        </Button>
 
         {children}
       </div>
