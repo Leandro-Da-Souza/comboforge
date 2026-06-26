@@ -12,3 +12,5 @@ export type SessionSummary = {
   endReason: TrainingEndReason
   finishedRounds: number
 }
+
+export type SessionHistory = SessionSummary[]

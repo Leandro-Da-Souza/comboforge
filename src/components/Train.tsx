@@ -14,6 +14,7 @@ import type { TimerPreset } from '../types/timer'
 import { trainingConfig } from '../config/training.config'
 import TrainingSessionMeta from './TrainingSessionMeta'
 import type { SessionSummary } from '../types/session'
+import useSessionSummary from '../hooks/useSessionSummary'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -34,6 +35,16 @@ export default function Train({
     endSession,
   } = useTrainingTimer(selectedPreset.config)
 
+  const { availableCombos } = useDisciplineSelection(
+    starterCombos,
+    selectedDiscipline,
+  )
+
+  const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
+    useComboRotation(availableCombos)
+
+  const { addSessionHistory } = useSessionSummary()
+
   const sessionSetup = useMemo(
     () => ({
       selectedDiscipline,
@@ -51,14 +62,6 @@ export default function Train({
       finishedRounds,
     }
   }, [status, endReason, finishedRounds, sessionSetup])
-
-  const { availableCombos } = useDisciplineSelection(
-    starterCombos,
-    selectedDiscipline,
-  )
-
-  const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
-    useComboRotation(availableCombos)
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -86,9 +89,8 @@ export default function Train({
 
   useEffect(() => {
     if (!sessionSummary) return
-
-    console.log(sessionSummary)
-  }, [sessionSummary])
+    addSessionHistory(sessionSummary)
+  }, [sessionSummary, addSessionHistory])
 
   useEffect(() => {
     if (status !== 'running') return
