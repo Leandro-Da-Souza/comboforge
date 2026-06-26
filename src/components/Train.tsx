@@ -14,7 +14,7 @@ import type { TimerPreset } from '../types/timer'
 import { trainingConfig } from '../config/training.config'
 import TrainingSessionMeta from './TrainingSessionMeta'
 import type { SessionSummary } from '../types/session'
-import useSessionSummary from '../hooks/useSessionSummary'
+import useSessionSummary from '../hooks/useSessionHistory'
 
 type TrainProps = {
   selectedDiscipline: Discipline
