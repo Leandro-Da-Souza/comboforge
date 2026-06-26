@@ -8,11 +8,12 @@ import { starterCombos } from '../data/starterCombo'
 import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import { trainingConfig } from '../config/training.config'
 import TrainingSessionMeta from './TrainingSessionMeta'
+import type { SessionSummary } from '../types/session'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -23,8 +24,33 @@ export default function Train({
   selectedDiscipline,
   selectedPreset,
 }: TrainProps) {
-  const { status, timer, startSession, pauseSession, endSession } =
-    useTrainingTimer(selectedPreset.config)
+  const {
+    status,
+    timer,
+    endReason,
+    finishedRounds,
+    startSession,
+    pauseSession,
+    endSession,
+  } = useTrainingTimer(selectedPreset.config)
+
+  const sessionSetup = useMemo(
+    () => ({
+      selectedDiscipline,
+      selectedPreset,
+    }),
+    [selectedDiscipline, selectedPreset],
+  )
+
+  const sessionSummary = useMemo<SessionSummary | undefined>(() => {
+    if (status !== 'ended' || !endReason) return undefined
+
+    return {
+      sessionSetup,
+      endReason,
+      finishedRounds,
+    }
+  }, [status, endReason, finishedRounds, sessionSetup])
 
   const { availableCombos } = useDisciplineSelection(
     starterCombos,
@@ -57,6 +83,12 @@ export default function Train({
     resetCombos(availableCombos)
     endSession()
   }
+
+  useEffect(() => {
+    if (!sessionSummary) return
+
+    console.log(sessionSummary)
+  }, [sessionSummary])
 
   useEffect(() => {
     if (status !== 'running') return

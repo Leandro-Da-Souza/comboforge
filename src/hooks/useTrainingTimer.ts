@@ -16,6 +16,8 @@ function trainingTimerReducer(
           state.status === 'ended'
             ? createTimerState(action.config)
             : state.timer,
+        finishedRounds: 0,
+        endReason: undefined,
       }
     }
 
@@ -27,9 +29,15 @@ function trainingTimerReducer(
     }
 
     case 'end': {
+      const timer = state.timer
+      const completedRounds =
+        timer.phase === 'rest' ? timer.currentRound : timer.currentRound - 1
+
       return {
         status: 'ended',
         timer: createTimerState(action.config),
+        finishedRounds: Math.max(completedRounds, 0),
+        endReason: 'abandoned',
       }
     }
 
@@ -52,7 +60,9 @@ function trainingTimerReducer(
         if (timer.currentRound >= timer.totalRounds) {
           return {
             status: 'ended',
-            timer: resetTimerProgress(state.timer),
+            timer: resetTimerProgress(timer),
+            finishedRounds: timer.totalRounds,
+            endReason: 'completed',
           }
         }
 
@@ -81,6 +91,8 @@ function trainingTimerReducer(
       return {
         status: 'idle',
         timer: createTimerState(action.config),
+        finishedRounds: 0,
+        endReason: undefined,
       }
     }
 
@@ -94,6 +106,7 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
   const [state, dispatch] = useReducer(trainingTimerReducer, {
     status: 'idle',
     timer: createTimerState(config),
+    finishedRounds: 0,
   })
 
   useEffect(() => {
@@ -128,6 +141,8 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
   return {
     status: state.status,
     timer: state.timer,
+    endReason: state.endReason,
+    finishedRounds: state.finishedRounds,
     startSession,
     pauseSession,
     endSession,
