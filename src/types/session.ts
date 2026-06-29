@@ -11,6 +11,14 @@ export type SessionSummary = {
   sessionSetup: SessionSetup
   endReason: TrainingEndReason
   finishedRounds: number
+  startedAt: string
+  endedAt: string
+  durationSeconds: number
 }
 
-export type SessionHistory = SessionSummary[]
+export type SessionRecord = SessionSummary & {
+  id: string
+  createdAt: string
+}
+
+export type SessionHistory = SessionRecord[]

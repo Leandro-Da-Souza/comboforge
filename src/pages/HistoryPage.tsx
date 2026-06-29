@@ -1,9 +1,9 @@
 import PageHeader from '../components/PageHeader'
+import SessionList from '../components/SessionList'
 import useSessionHistory from '../hooks/useSessionHistory'
 
 export default function HistoryPage() {
   const { sessionHistory } = useSessionHistory()
-  console.log(sessionHistory)
   return (
     <>
       <PageHeader
@@ -11,6 +11,7 @@ export default function HistoryPage() {
         title="History"
         description="Review completed training sessions."
       />
+      <SessionList sessions={sessionHistory} />
     </>
   )
 }

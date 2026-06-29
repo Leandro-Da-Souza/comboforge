@@ -1,9 +1,9 @@
 import { createContext } from 'react'
-import type { SessionHistory, SessionSummary } from '../../types/session'
+import type { SessionHistory, SessionRecord } from '../../types/session'
 
 export type SessionHistoryStore = {
   sessionHistory: SessionHistory
-  addSessionHistory: (summary: SessionSummary) => void
+  addSessionHistory: (record: SessionRecord) => void
 }
 
 export const SessionHistoryContext = createContext<SessionHistoryStore | null>(

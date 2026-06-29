@@ -4,17 +4,21 @@ import TimerPanel from './TimerPanel'
 import ComboPanel from './ComboPanel'
 import TrainingControls from './TrainingControls'
 import SessionStatus from './SessionStatus'
+import Modal from './ui/Modal'
+import Button from './ui/Button'
+import SessionSummaryDetails from './SessionSummaryDetails'
 import { starterCombos } from '../data/starterCombo'
 import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import { trainingConfig } from '../config/training.config'
 import TrainingSessionMeta from './TrainingSessionMeta'
-import type { SessionSummary } from '../types/session'
-import useSessionSummary from '../hooks/useSessionHistory'
+import type { SessionRecord, SessionSummary } from '../types/session'
+import useSessionHistory from '../hooks/useSessionHistory'
+import { useNavigate } from 'react-router'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -43,7 +47,11 @@ export default function Train({
   const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
     useComboRotation(availableCombos)
 
-  const { addSessionHistory } = useSessionSummary()
+  const [startedAt, setStartedAt] = useState<string | undefined>()
+
+  const { addSessionHistory } = useSessionHistory()
+
+  const navigate = useNavigate()
 
   const sessionSetup = useMemo(
     () => ({
@@ -54,14 +62,21 @@ export default function Train({
   )
 
   const sessionSummary = useMemo<SessionSummary | undefined>(() => {
-    if (status !== 'ended' || !endReason) return undefined
+    if (status !== 'ended' || !endReason || !startedAt) return undefined
+
+    const endedAt = new Date().toISOString()
+    const durationSeconds =
+      (new Date(endedAt).getTime() - new Date(startedAt).getTime()) / 1000
 
     return {
       sessionSetup,
       endReason,
       finishedRounds,
+      startedAt,
+      endedAt,
+      durationSeconds,
     }
-  }, [status, endReason, finishedRounds, sessionSetup])
+  }, [status, endReason, finishedRounds, sessionSetup, startedAt])
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -78,6 +93,9 @@ export default function Train({
       : (currentCombo?.id ?? 'empty-combo')
 
   function handleStartSession(): void {
+    if (status === 'idle' || status === 'ended') {
+      setStartedAt(new Date().toISOString())
+    }
     resetCombos(availableCombos)
     startSession()
   }
@@ -87,10 +105,25 @@ export default function Train({
     endSession()
   }
 
-  useEffect(() => {
+  function handleSaveSession(): void {
     if (!sessionSummary) return
-    addSessionHistory(sessionSummary)
-  }, [sessionSummary, addSessionHistory])
+
+    const record: SessionRecord = {
+      ...sessionSummary,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    }
+
+    addSessionHistory(record)
+    setStartedAt(undefined)
+    void navigate('/history')
+  }
+
+  function handleDiscardSession(): void {
+    setStartedAt(undefined)
+  }
+
+  const isSessionSummaryOpen = Boolean(sessionSummary)
 
   useEffect(() => {
     if (status !== 'running') return
@@ -142,6 +175,21 @@ export default function Train({
           isRunning={isRunning}
           canEnd={canEnd}
         />
+        <Modal show={isSessionSummaryOpen} onClose={handleDiscardSession}>
+          {sessionSummary && (
+            <div className="session-summary-modal">
+              <SessionSummaryDetails session={sessionSummary} />
+              <div className="session-summary-actions">
+                <Button variant="secondary" onClick={handleDiscardSession}>
+                  Discard
+                </Button>
+                <Button variant="primary" onClick={handleSaveSession}>
+                  Save
+                </Button>
+              </div>
+            </div>
+          )}
+        </Modal>
       </div>
     </section>
   )

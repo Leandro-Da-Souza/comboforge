@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
-import type { SessionHistory, SessionSummary } from '../../types/session'
+import type { SessionHistory, SessionRecord } from '../../types/session'
 import { STORAGE_KEYS } from '../../config/storage.config'
 import { storage } from '../../utils/storage'
 import { SessionHistoryContext } from './SessionHistoryContext'
@@ -15,8 +15,8 @@ export default function SessionHistoryProvider({
     storage.get(STORAGE_KEYS.sessionHistory, []),
   )
 
-  const addSessionHistory = useCallback((summary: SessionSummary) => {
-    setSessionHistory((currentHistory) => [...currentHistory, summary])
+  const addSessionHistory = useCallback((record: SessionRecord) => {
+    setSessionHistory((currentHistory) => [...currentHistory, record])
   }, [])
 
   useEffect(() => {
