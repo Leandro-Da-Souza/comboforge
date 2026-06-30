@@ -13,5 +13,6 @@ export default function useSessionHistory() {
   return {
     sessionHistory: context.sessionHistory,
     addSessionHistory: context.addSessionHistory,
+    deleteSessionFromHistory: context.deleteSessionFromHistory,
   }
 }

@@ -1,8 +1,4 @@
-import type {
-  SessionHistory,
-  SessionRecord,
-  SessionSummary,
-} from '../types/session'
+import type { SessionHistory, SessionRecord } from '../types/session'
 import {
   formatSessionDiscipline,
   formatSessionDuration,
@@ -13,6 +9,9 @@ import '../styles/session-list.css'
 import { useState } from 'react'
 import Modal from './ui/Modal'
 import SessionSummaryDetails from './SessionSummaryDetails'
+import Button from './ui/Button'
+import { Trash } from 'lucide-react'
+import useSessionHistory from '../hooks/useSessionHistory'
 
 type SessionListProps = {
   sessions: SessionHistory
@@ -22,12 +21,18 @@ export default function SessionList({ sessions }: SessionListProps) {
   const [displayedSession, setDisplayedSession] =
     useState<SessionRecord | null>(null)
 
+  const { deleteSessionFromHistory } = useSessionHistory()
+
   function handleSelectedSession(record: SessionRecord) {
-    if (!record) return null
     setDisplayedSession(record)
   }
 
   function clearSelectedSession(): void {
+    setDisplayedSession(null)
+  }
+
+  function handleDeleteSession(record: SessionRecord) {
+    deleteSessionFromHistory(record.id)
     setDisplayedSession(null)
   }
 
@@ -89,7 +94,16 @@ export default function SessionList({ sessions }: SessionListProps) {
       ))}
       <Modal show={displayedSession !== null} onClose={clearSelectedSession}>
         {displayedSession && (
-          <SessionSummaryDetails session={displayedSession} />
+          <SessionSummaryDetails session={displayedSession}>
+            <Button
+              type="button"
+              variant="danger"
+              aria-label="Delete session"
+              onClick={() => handleDeleteSession(displayedSession)}
+            >
+              <Trash aria-hidden="true" size={18} />
+            </Button>
+          </SessionSummaryDetails>
         )}
       </Modal>
     </section>

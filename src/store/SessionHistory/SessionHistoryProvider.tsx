@@ -19,13 +19,19 @@ export default function SessionHistoryProvider({
     setSessionHistory((currentHistory) => [...currentHistory, record])
   }, [])
 
+  const deleteSessionFromHistory = useCallback((recordId: string) => {
+    setSessionHistory((currentHistory) =>
+      currentHistory.filter((session) => session.id !== recordId),
+    )
+  }, [])
+
   useEffect(() => {
     storage.set(STORAGE_KEYS.sessionHistory, sessionHistory)
   }, [sessionHistory])
 
   return (
     <SessionHistoryContext.Provider
-      value={{ sessionHistory, addSessionHistory }}
+      value={{ sessionHistory, addSessionHistory, deleteSessionFromHistory }}
     >
       {children}
     </SessionHistoryContext.Provider>

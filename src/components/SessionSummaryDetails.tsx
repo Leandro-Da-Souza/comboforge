@@ -5,13 +5,16 @@ import {
   formatSessionTime,
 } from '../utils/session'
 import '../styles/session-summary.css'
+import type { ReactNode } from 'react'
 
 type SessionSummaryDetailsProps = {
   session: SessionSummary
+  children?: ReactNode | null
 }
 
 export default function SessionSummaryDetails({
   session,
+  children = null,
 }: SessionSummaryDetailsProps) {
   const preset = session.sessionSetup.selectedPreset
   const resultLabel =
@@ -24,7 +27,6 @@ export default function SessionSummaryDetails({
         <h2>{preset.name}</h2>
         <span className="session-summary-result">{resultLabel}</span>
       </header>
-
       <dl className="session-summary-grid">
         <div>
           <dt>Discipline</dt>
@@ -45,6 +47,7 @@ export default function SessionSummaryDetails({
           <dd>{formatSessionTime(session.endedAt)}</dd>
         </div>
       </dl>
+      {children && <div className="session-summary-footer">{children}</div>}
     </article>
   )
 }
