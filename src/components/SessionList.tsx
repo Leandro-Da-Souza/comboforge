@@ -1,4 +1,8 @@
-import type { SessionHistory } from '../types/session'
+import type {
+  SessionHistory,
+  SessionRecord,
+  SessionSummary,
+} from '../types/session'
 import {
   formatSessionDiscipline,
   formatSessionDuration,
@@ -6,12 +10,27 @@ import {
   groupSessionsByDate,
 } from '../utils/session'
 import '../styles/session-list.css'
+import { useState } from 'react'
+import Modal from './ui/Modal'
+import SessionSummaryDetails from './SessionSummaryDetails'
 
 type SessionListProps = {
   sessions: SessionHistory
 }
 
 export default function SessionList({ sessions }: SessionListProps) {
+  const [displayedSession, setDisplayedSession] =
+    useState<SessionRecord | null>(null)
+
+  function handleSelectedSession(record: SessionRecord) {
+    if (!record) return null
+    setDisplayedSession(record)
+  }
+
+  function clearSelectedSession(): void {
+    setDisplayedSession(null)
+  }
+
   if (!sessions.length) {
     return (
       <section className="session-list-empty">
@@ -35,7 +54,11 @@ export default function SessionList({ sessions }: SessionListProps) {
                 session.endReason === 'completed' ? 'Complete' : 'Abandoned'
 
               return (
-                <li className="session-list-item" key={session.id}>
+                <li
+                  className="session-list-item"
+                  key={session.id}
+                  onClick={() => handleSelectedSession(session)}
+                >
                   <article className="session-list-card">
                     <header>
                       <div>
@@ -64,6 +87,11 @@ export default function SessionList({ sessions }: SessionListProps) {
           </ol>
         </section>
       ))}
+      <Modal show={displayedSession !== null} onClose={clearSelectedSession}>
+        {displayedSession && (
+          <SessionSummaryDetails session={displayedSession} />
+        )}
+      </Modal>
     </section>
   )
 }
