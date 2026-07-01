@@ -64,7 +64,45 @@
   font-weight: 800;
 }
 
+.session-summary-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.session-summary-footer .button {
+  min-width: 48px;
+}
+
+.session-details-modal {
+  width: min(calc(100% - 32px), 390px);
+}
+
+.session-details-modal .session-summary {
+  padding: 24px;
+}
+
+.session-details-modal .session-summary h2 {
+  font-size: clamp(2rem, 12vw, 3rem);
+}
+
+.session-details-modal .session-summary-footer {
+  justify-content: stretch;
+}
+
+.session-delete-button {
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
 :root[data-theme='muaythai'] .session-summary h2 {
   font-family: var(--ff-sans);
   font-size: clamp(1.7rem, 9vw, 2.5rem);
+}
+
+:root[data-theme='muaythai'] .session-details-modal .session-summary h2 {
+  font-size: clamp(1.6rem, 8vw, 2.2rem);
 }

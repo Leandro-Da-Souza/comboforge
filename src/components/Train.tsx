@@ -178,15 +178,16 @@ export default function Train({
         <Modal show={isSessionSummaryOpen} onClose={handleDiscardSession}>
           {sessionSummary && (
             <div className="session-summary-modal">
-              <SessionSummaryDetails session={sessionSummary} />
-              <div className="session-summary-actions">
-                <Button variant="secondary" onClick={handleDiscardSession}>
-                  Discard
-                </Button>
-                <Button variant="primary" onClick={handleSaveSession}>
-                  Save
-                </Button>
-              </div>
+              <SessionSummaryDetails session={sessionSummary}>
+                <div className="session-summary-actions">
+                  <Button variant="secondary" onClick={handleDiscardSession}>
+                    Discard
+                  </Button>
+                  <Button variant="primary" onClick={handleSaveSession}>
+                    Save
+                  </Button>
+                </div>
+              </SessionSummaryDetails>
             </div>
           )}
         </Modal>

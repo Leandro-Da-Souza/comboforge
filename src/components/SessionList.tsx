@@ -12,6 +12,7 @@ import SessionSummaryDetails from './SessionSummaryDetails'
 import Button from './ui/Button'
 import { Trash } from 'lucide-react'
 import useSessionHistory from '../hooks/useSessionHistory'
+import Prompt from './ui/Prompt'
 
 type SessionListProps = {
   sessions: SessionHistory
@@ -19,6 +20,8 @@ type SessionListProps = {
 
 export default function SessionList({ sessions }: SessionListProps) {
   const [displayedSession, setDisplayedSession] =
+    useState<SessionRecord | null>(null)
+  const [sessionPendingDelete, setSessionPendingDelete] =
     useState<SessionRecord | null>(null)
 
   const { deleteSessionFromHistory } = useSessionHistory()
@@ -31,8 +34,16 @@ export default function SessionList({ sessions }: SessionListProps) {
     setDisplayedSession(null)
   }
 
-  function handleDeleteSession(record: SessionRecord) {
-    deleteSessionFromHistory(record.id)
+  function handlePendingDelete(record: SessionRecord) {
+    setDisplayedSession(null)
+    setSessionPendingDelete(record)
+  }
+
+  function handleDeleteSession(): void {
+    if (!sessionPendingDelete) return
+
+    deleteSessionFromHistory(sessionPendingDelete.id)
+    setSessionPendingDelete(null)
     setDisplayedSession(null)
   }
 
@@ -92,20 +103,34 @@ export default function SessionList({ sessions }: SessionListProps) {
           </ol>
         </section>
       ))}
-      <Modal show={displayedSession !== null} onClose={clearSelectedSession}>
+      <Modal
+        show={displayedSession !== null}
+        onClose={clearSelectedSession}
+        className="session-details-modal"
+      >
         {displayedSession && (
           <SessionSummaryDetails session={displayedSession}>
             <Button
               type="button"
               variant="danger"
+              className="session-delete-button"
               aria-label="Delete session"
-              onClick={() => handleDeleteSession(displayedSession)}
+              onClick={() => handlePendingDelete(displayedSession)}
             >
-              <Trash aria-hidden="true" size={18} />
+              Delete session
             </Button>
           </SessionSummaryDetails>
         )}
       </Modal>
+      <Prompt
+        show={sessionPendingDelete !== null}
+        title="Delete session?"
+        message="This removes the workout from your local history."
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
+        onConfirm={handleDeleteSession}
+        onCancel={() => setSessionPendingDelete(null)}
+      />
     </section>
   )
 }

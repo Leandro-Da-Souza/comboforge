@@ -1,0 +1,42 @@
+.prompt-modal {
+  width: min(calc(100% - 32px), 360px);
+}
+
+.prompt {
+  display: grid;
+  gap: 22px;
+  padding: 24px;
+}
+
+.prompt-info {
+  display: grid;
+  gap: 8px;
+  padding-right: 34px;
+}
+
+.prompt-info h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 9vw, 2.6rem);
+  line-height: 0.95;
+}
+
+.prompt-info p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.prompt-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+:root[data-theme='muaythai'] .prompt-info h2 {
+  font-family: var(--ff-sans);
+  font-size: clamp(1.45rem, 7vw, 2rem);
+  line-height: 1.05;
+}
