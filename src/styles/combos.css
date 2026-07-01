@@ -1,0 +1,120 @@
+.combos-page {
+  display: grid;
+  gap: 26px;
+}
+
+.combo-section {
+  display: grid;
+  gap: 12px;
+}
+
+.combo-section-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.combo-section-header h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.65rem, 8vw, 2.35rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.combo-section-header > span,
+.combo-section-eyebrow,
+.combo-card-discipline,
+.combo-card-source {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.combo-section-header > span,
+.combo-section-eyebrow,
+.combo-card-discipline {
+  color: var(--muted-foreground);
+}
+
+.combo-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.combo-list-item {
+  margin: 0;
+}
+
+.combo-card {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px;
+  background: var(--surface);
+}
+
+.combo-card header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.combo-card h3 {
+  margin: 4px 0 0;
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.combo-card-source {
+  border-radius: calc(var(--radius) * 0.6);
+  padding: 5px 7px;
+  background: color-mix(in srgb, var(--primary) 13%, transparent);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.combo-card-actions {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.combo-list-empty {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  background: var(--surface);
+  color: var(--muted-foreground);
+}
+
+.combo-list-empty h3 {
+  margin: 0 0 6px;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: 1.8rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.combo-list-empty p {
+  margin: 0;
+}
+
+[data-theme='muaythai'] .combo-section-header h2,
+[data-theme='muaythai'] .combo-list-empty h3 {
+  font-family: var(--ff-body);
+  font-weight: 900;
+}
