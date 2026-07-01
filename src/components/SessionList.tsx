@@ -10,7 +10,6 @@ import { useState } from 'react'
 import Modal from './ui/Modal'
 import SessionSummaryDetails from './SessionSummaryDetails'
 import Button from './ui/Button'
-import { Trash } from 'lucide-react'
 import useSessionHistory from '../hooks/useSessionHistory'
 import Prompt from './ui/Prompt'
 
