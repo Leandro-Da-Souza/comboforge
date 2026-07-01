@@ -7,7 +7,6 @@ import SessionStatus from './SessionStatus'
 import Modal from './ui/Modal'
 import Button from './ui/Button'
 import SessionSummaryDetails from './SessionSummaryDetails'
-import { starterCombos } from '../data/starterCombo'
 import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
@@ -19,6 +18,7 @@ import TrainingSessionMeta from './TrainingSessionMeta'
 import type { SessionRecord, SessionSummary } from '../types/session'
 import useSessionHistory from '../hooks/useSessionHistory'
 import { useNavigate } from 'react-router'
+import useCombos from '../hooks/useCombos'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -39,10 +39,9 @@ export default function Train({
     endSession,
   } = useTrainingTimer(selectedPreset.config)
 
-  const { availableCombos } = useDisciplineSelection(
-    starterCombos,
-    selectedDiscipline,
-  )
+  const { combos } = useCombos()
+
+  const { availableCombos } = useDisciplineSelection(combos, selectedDiscipline)
 
   const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
     useComboRotation(availableCombos)
