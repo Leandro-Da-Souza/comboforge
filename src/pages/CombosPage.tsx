@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
+import Button from '../components/ui/Button'
+import Modal from '../components/ui/Modal'
 import useCombos from '../hooks/useCombos'
 import '../styles/combos.css'
 import { formatCombo } from '../utils/combo'
 import { formatDiscipline } from '../utils/discipline'
+import ComboForm from '../components/ComboForm'
 
 export default function CombosPage() {
   const { starterCombos, customCombos } = useCombos()
+  const [openModal, setOpenModal] = useState<boolean>(false)
 
   return (
     <>
@@ -26,25 +31,25 @@ export default function CombosPage() {
           </header>
 
           <ul className="combo-list">
-          {starterCombos.map((combo) => (
-            <li className="combo-list-item" key={combo.id}>
-              <article className="combo-card">
-                <header>
-                  <div>
-                    <p className="combo-card-discipline">
-                      {formatDiscipline(combo.discipline)}
-                    </p>
-                    <h3>{combo.name}</h3>
-                  </div>
-                  <span className="combo-card-source">Starter</span>
-                </header>
+            {starterCombos.map((combo) => (
+              <li className="combo-list-item" key={combo.id}>
+                <article className="combo-card">
+                  <header>
+                    <div>
+                      <p className="combo-card-discipline">
+                        {formatDiscipline(combo.discipline)}
+                      </p>
+                      <h3>{combo.name}</h3>
+                    </div>
+                    <span className="combo-card-source">Starter</span>
+                  </header>
 
-                <p className="combo-card-actions">
-                  {formatCombo(combo.actions)}
-                </p>
-              </article>
-            </li>
-          ))}
+                  <p className="combo-card-actions">
+                    {formatCombo(combo.actions)}
+                  </p>
+                </article>
+              </li>
+            ))}
           </ul>
         </section>
 
@@ -54,7 +59,18 @@ export default function CombosPage() {
               <p className="combo-section-eyebrow">Your work</p>
               <h2>Custom Combos</h2>
             </div>
-            <span>{customCombos.length} combos</span>
+            <div className="combo-section-actions">
+              <span>{customCombos.length} combos</span>
+
+              <Button
+                variant="primary"
+                aria-label="add combo"
+                className="combo-section-actions-add"
+                onClick={() => setOpenModal((prev) => !prev)}
+              >
+                Add Combo
+              </Button>
+            </div>
           </header>
 
           {customCombos.length > 0 ? (
@@ -89,6 +105,9 @@ export default function CombosPage() {
             </div>
           )}
         </section>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <ComboForm onCreated={() => setOpenModal(false)} />
+        </Modal>
       </section>
     </>
   )

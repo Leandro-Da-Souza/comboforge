@@ -25,6 +25,7 @@
 }
 
 .combo-section-header > span,
+.combo-section-actions > span,
 .combo-section-eyebrow,
 .combo-card-discipline,
 .combo-card-source {
@@ -36,9 +37,21 @@
 }
 
 .combo-section-header > span,
+.combo-section-actions > span,
 .combo-section-eyebrow,
 .combo-card-discipline {
   color: var(--muted-foreground);
+}
+
+.combo-section-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.combo-section-actions-add {
+  font-size: 0.75rem;
+  min-height: 33px;
+  margin-top: 2px;
 }
 
 .combo-list {
