@@ -66,7 +66,7 @@ export default function HomePage() {
       <div className="home-setup">
         <div className="home-section-heading">
           <p className="home-kicker">Preset</p>
-          <NavLink to="/combos">Custom -&gt;</NavLink>
+          <NavLink to="/combos">Edit -&gt;</NavLink>
           <Select
             label="Discipline"
             value={selectedDiscipline}

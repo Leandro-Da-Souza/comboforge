@@ -85,11 +85,14 @@ export default function ComboForm({ onCreated }: ComboFormProps) {
       </label>
 
       <div className="combo-form-grid">
-        <Select
-          label="Discipline"
-          options={disciplineOptions}
-          {...register('discipline', { required: true })}
-        />
+        <div className="combo-form-control-group">
+          <Select
+            label="Discipline"
+            options={disciplineOptions}
+            {...register('discipline', { required: true })}
+          />
+          <small>Used in workouts with this discipline.</small>
+        </div>
         <Select
           label="Intensity"
           options={intensityOptions}

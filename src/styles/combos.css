@@ -3,6 +3,43 @@
   gap: 26px;
 }
 
+.combo-routing-note {
+  display: grid;
+  gap: 5px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: color-mix(in srgb, var(--surface) 84%, var(--primary) 16%);
+}
+
+.combo-routing-note p,
+.combo-section-description {
+  margin: 0;
+}
+
+.combo-routing-note p {
+  color: var(--primary);
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.combo-routing-note h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.7rem, 8vw, 2.35rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.combo-routing-note span,
+.combo-section-description {
+  color: var(--muted-foreground);
+}
+
 .combo-section {
   display: grid;
   gap: 12px;
@@ -22,6 +59,13 @@
   font-size: clamp(1.65rem, 8vw, 2.35rem);
   line-height: 1;
   text-transform: uppercase;
+}
+
+.combo-section-description {
+  margin-top: 4px;
+  max-width: 22rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
 }
 
 .combo-section-header > span,
@@ -126,6 +170,7 @@
   margin: 0;
 }
 
+[data-theme='muaythai'] .combo-routing-note h2,
 [data-theme='muaythai'] .combo-section-header h2,
 [data-theme='muaythai'] .combo-list-empty h3 {
   font-family: var(--ff-body);

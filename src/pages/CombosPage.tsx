@@ -21,6 +21,15 @@ export default function CombosPage() {
       />
 
       <section className="combos-page" aria-label="Combo library">
+        <section className="combo-routing-note" aria-label="How combos are used">
+          <p>How training uses combos</p>
+          <h2>Matched by discipline</h2>
+          <span>
+            When you start a workout, ComboForge pulls every starter and custom
+            combo that matches the selected discipline.
+          </span>
+        </section>
+
         <section className="combo-section">
           <header className="combo-section-header">
             <div>
@@ -58,6 +67,9 @@ export default function CombosPage() {
             <div>
               <p className="combo-section-eyebrow">Your work</p>
               <h2>Custom Combos</h2>
+              <p className="combo-section-description">
+                Custom combos join matching discipline workouts automatically.
+              </p>
             </div>
             <div className="combo-section-actions">
               <span>{customCombos.length} combos</span>
