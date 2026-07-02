@@ -8,6 +8,7 @@ export function createTimerState(config: TimerConfig): TimerState {
     totalRounds: config.totalRounds,
     roundDurationSeconds: config.roundDurationSeconds,
     restDurationSeconds: config.restDurationSeconds,
+    rotationIntervalMilliseconds: config.rotationIntervalMilliseconds,
   }
 }
 
@@ -19,5 +20,6 @@ export function resetTimerProgress(timer: TimerState): TimerState {
     totalRounds: timer.totalRounds,
     roundDurationSeconds: timer.roundDurationSeconds,
     restDurationSeconds: timer.restDurationSeconds,
+    rotationIntervalMilliseconds: timer.rotationIntervalMilliseconds,
   }
 }

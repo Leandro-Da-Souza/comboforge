@@ -4,6 +4,7 @@ export const defaultTimerConfig: TimerConfig = {
   totalRounds: 3,
   roundDurationSeconds: 180,
   restDurationSeconds: 60,
+  rotationIntervalMilliseconds: 4000,
 }
 
 export const timerPresets: TimerPreset[] = [
@@ -19,6 +20,7 @@ export const timerPresets: TimerPreset[] = [
       totalRounds: 5,
       roundDurationSeconds: 180,
       restDurationSeconds: 60,
+      rotationIntervalMilliseconds: 3000,
     },
   },
   {
@@ -28,6 +30,7 @@ export const timerPresets: TimerPreset[] = [
       totalRounds: 5,
       roundDurationSeconds: 300,
       restDurationSeconds: 60,
+      rotationIntervalMilliseconds: 2000,
     },
   },
 ]

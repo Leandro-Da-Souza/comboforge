@@ -13,7 +13,6 @@ import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import { useEffect, useMemo, useState } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
-import { trainingConfig } from '../config/training.config'
 import TrainingSessionMeta from './TrainingSessionMeta'
 import type { SessionRecord, SessionSummary } from '../types/session'
 import useSessionHistory from '../hooks/useSessionHistory'
@@ -131,12 +130,18 @@ export default function Train({
 
     const intervalId = window.setInterval(() => {
       rotateCombo()
-    }, trainingConfig.comboRotationIntervalMs)
+    }, timer.rotationIntervalMilliseconds)
 
     return () => {
       window.clearInterval(intervalId)
     }
-  }, [status, timer.phase, availableCombos.length, rotateCombo])
+  }, [
+    status,
+    timer.phase,
+    availableCombos.length,
+    rotateCombo,
+    timer.rotationIntervalMilliseconds,
+  ])
 
   return (
     <section className="train-screen">
