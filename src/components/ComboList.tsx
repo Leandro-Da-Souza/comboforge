@@ -10,6 +10,7 @@ type ComboListProps = {
   eyebrow: string
   sourceLabel: string
   headerChild?: ReactNode | null
+  onEditCombo?: (combo: Combo) => void
 }
 
 export default function ComboList({
@@ -19,6 +20,7 @@ export default function ComboList({
   description,
   sourceLabel,
   headerChild,
+  onEditCombo,
 }: ComboListProps) {
   return (
     <section className="combo-section">
@@ -34,7 +36,11 @@ export default function ComboList({
       {combos.length > 0 ? (
         <ul className="combo-list">
           {combos.map((combo) => (
-            <li className="combo-list-item" key={combo.id}>
+            <li
+              className="combo-list-item"
+              key={combo.id}
+              onClick={() => onEditCombo?.(combo)}
+            >
               <article className="combo-card">
                 <header>
                   <div>

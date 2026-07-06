@@ -6,10 +6,12 @@ import useCombos from '../hooks/useCombos'
 import '../styles/combos.css'
 import ComboForm from '../components/ComboForm'
 import ComboList from '../components/ComboList'
+import type { Combo } from '../types/core'
 
 export default function CombosPage() {
   const { starterCombos, customCombos } = useCombos()
-  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false)
+  const [comboIsEditing, setComboIsEditing] = useState<Combo | null>(null)
 
   return (
     <>
@@ -54,15 +56,22 @@ export default function CombosPage() {
                 variant="primary"
                 aria-label="add combo"
                 className="combo-section-actions-add"
-                onClick={() => setOpenModal((prev) => !prev)}
+                onClick={() => setIsCreateOpen((prev) => !prev)}
               >
                 Add Combo
               </Button>
             </div>
           }
+          onEditCombo={setComboIsEditing}
         />
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <ComboForm onCreated={() => setOpenModal(false)} />
+        <Modal show={isCreateOpen} onClose={() => setIsCreateOpen(false)}>
+          <ComboForm onCreated={() => setIsCreateOpen(false)} />
+        </Modal>
+        <Modal
+          show={comboIsEditing !== null}
+          onClose={() => setComboIsEditing(null)}
+        >
+          <ComboForm />
         </Modal>
       </section>
     </>
