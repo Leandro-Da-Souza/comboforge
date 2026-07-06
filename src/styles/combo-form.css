@@ -1,12 +1,14 @@
 .combo-form {
   display: grid;
-  gap: 16px;
-  padding: 22px;
+  gap: 18px;
+  width: 100%;
+  padding: 28px 22px 22px;
 }
 
 .combo-form-header {
   display: grid;
   gap: 4px;
+  padding-right: 28px;
 }
 
 .combo-form-header p,
@@ -23,7 +25,7 @@
   margin: 0;
   color: var(--foreground);
   font-family: var(--ff-display);
-  font-size: clamp(2rem, 10vw, 3rem);
+  font-size: clamp(2.25rem, 11vw, 3.35rem);
   line-height: 0.95;
   text-transform: uppercase;
 }
@@ -84,7 +86,7 @@
 
 .combo-form-grid {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .combo-form-control-group {
@@ -98,9 +100,24 @@
   line-height: 1.3;
 }
 
-.combo-form > button {
+.combo-form-button-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.combo-form-button-group .button {
   width: 100%;
-  margin-top: 4px;
+  justify-content: center;
+}
+
+.combo-form-button-group .button-danger {
+  order: 2;
+}
+
+.combo-form-button-group .button-primary {
+  order: 1;
 }
 
 [data-theme='muaythai'] .combo-form-header h2 {
@@ -111,5 +128,17 @@
 @media (min-width: 420px) {
   .combo-form-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .combo-form-button-group {
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .combo-form-button-group .button-danger {
+    order: 1;
+  }
+
+  .combo-form-button-group .button-primary {
+    order: 2;
   }
 }

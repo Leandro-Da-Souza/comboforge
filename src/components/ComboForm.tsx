@@ -14,6 +14,9 @@ type ComboFormValues = {
 
 type ComboFormProps = {
   onCreated?: () => void
+  combo?: Combo
+  onSaved?: () => void
+  onDelete?: (combo: Combo) => void
 }
 
 const disciplineOptions: Array<{ label: string; value: Discipline }> = [
@@ -28,8 +31,13 @@ const intensityOptions: Array<{ label: string; value: Intensity }> = [
   { label: 'Advanced', value: 'advanced' },
 ]
 
-export default function ComboForm({ onCreated }: ComboFormProps) {
-  const { addCombo } = useCombos()
+export default function ComboForm({
+  onCreated,
+  combo,
+  onSaved,
+  onDelete,
+}: ComboFormProps) {
+  const { addCombo, updateCombo } = useCombos()
   const {
     register,
     handleSubmit,
@@ -37,10 +45,14 @@ export default function ComboForm({ onCreated }: ComboFormProps) {
     formState: { errors },
   } = useForm<ComboFormValues>({
     defaultValues: {
-      discipline: 'boxing',
-      intensity: 'beginner',
+      name: combo?.name ?? '',
+      discipline: combo?.discipline ?? 'boxing',
+      intensity: combo?.intensity ?? 'beginner',
+      actionsText: combo?.actions.join(', ') ?? '',
     },
   })
+
+  const isEditing = Boolean(combo)
 
   const parseActions = (actions: string) => {
     return actions
@@ -50,17 +62,23 @@ export default function ComboForm({ onCreated }: ComboFormProps) {
   }
 
   const onSubmit: SubmitHandler<ComboFormValues> = (data) => {
-    const combo: Combo = {
-      id: crypto.randomUUID(),
+    const savedCombo: Combo = {
+      id: combo?.id ?? crypto.randomUUID(),
       name: data.name,
       discipline: data.discipline,
-      intensity: data.intensity || 'beginner',
+      intensity: data.intensity,
       actions: parseActions(data.actionsText),
     }
 
-    addCombo(combo)
-    reset()
-    onCreated?.()
+    if (combo) {
+      updateCombo(savedCombo)
+      reset()
+      onSaved?.()
+    } else {
+      addCombo(savedCombo)
+      reset()
+      onCreated?.()
+    }
   }
 
   return (
@@ -71,15 +89,14 @@ export default function ComboForm({ onCreated }: ComboFormProps) {
       }}
     >
       <header className="combo-form-header">
-        <p>Create combo</p>
-        <h2>New sequence</h2>
+        <h2>{isEditing ? 'Edit Combo' : 'New Combo'}</h2>
       </header>
 
       <label className="combo-form-field">
         <span>Name</span>
         <input
           {...register('name', { required: true })}
-          placeholder="Jab Cross Hook"
+          placeholder={combo?.name ?? 'Jab Cross Hook'}
         />
         {errors.name && <small>Name is required.</small>}
       </label>
@@ -110,9 +127,20 @@ export default function ComboForm({ onCreated }: ComboFormProps) {
         {errors.actionsText && <small>Add at least one action.</small>}
       </label>
 
-      <Button type="submit" variant="primary">
-        Save combo
-      </Button>
+      <div className="combo-form-button-group">
+        {isEditing && combo && (
+          <Button
+            type="button"
+            variant="danger"
+            onClick={() => onDelete?.(combo)}
+          >
+            Delete
+          </Button>
+        )}
+        <Button type="submit" variant="primary">
+          {isEditing ? 'Save Changes' : 'Save Combo'}
+        </Button>
+      </div>
     </form>
   )
 }
