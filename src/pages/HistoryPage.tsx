@@ -4,6 +4,7 @@ import useSessionHistory from '../hooks/useSessionHistory'
 
 export default function HistoryPage() {
   const { sessionHistory } = useSessionHistory()
+  console.log(sessionHistory)
   return (
     <>
       <PageHeader

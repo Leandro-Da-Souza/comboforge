@@ -42,7 +42,7 @@ export default function Train({
 
   const { availableCombos } = useDisciplineSelection(combos, selectedDiscipline)
 
-  const { currentCombo, upcomingCombo, resetCombos, rotateCombo } =
+  const { currentCombo, upcomingCombo, resetCombos, rotateCombo, combosUsed } =
     useComboRotation(availableCombos)
 
   const [startedAt, setStartedAt] = useState<string | undefined>()
@@ -73,8 +73,9 @@ export default function Train({
       startedAt,
       endedAt,
       durationSeconds,
+      combosUsed,
     }
-  }, [status, endReason, finishedRounds, sessionSetup, startedAt])
+  }, [status, endReason, finishedRounds, sessionSetup, startedAt, combosUsed])
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -94,12 +95,11 @@ export default function Train({
     if (status === 'idle' || status === 'ended') {
       setStartedAt(new Date().toISOString())
     }
-    resetCombos(availableCombos)
+    resetCombos(availableCombos, true)
     startSession()
   }
 
   function handleEndSession(): void {
-    resetCombos(availableCombos)
     endSession()
   }
 

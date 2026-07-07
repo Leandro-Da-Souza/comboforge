@@ -1,4 +1,4 @@
-import type { Discipline } from './core'
+import type { Combo, Discipline } from './core'
 import type { TimerPreset } from './timer'
 import type { TrainingEndReason } from './training'
 
@@ -14,6 +14,7 @@ export type SessionSummary = {
   startedAt: string
   endedAt: string
   durationSeconds: number
+  combosUsed: Combo[]
 }
 
 export type SessionRecord = SessionSummary & {
