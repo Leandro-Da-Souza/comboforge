@@ -11,9 +11,18 @@ type SessionHistoryProviderProps = {
 export default function SessionHistoryProvider({
   children,
 }: SessionHistoryProviderProps) {
-  const [sessionHistory, setSessionHistory] = useState<SessionHistory>(() =>
-    storage.get(STORAGE_KEYS.sessionHistory, []),
-  )
+  const [sessionHistory, setSessionHistory] = useState<SessionHistory>(() => {
+    const storedSessions = storage.get<SessionHistory>(
+      STORAGE_KEYS.sessionHistory,
+      [],
+    )
+
+    const normalizedSessions = storedSessions.map((session) => ({
+      ...session,
+      combosUsed: session.combosUsed ?? [],
+    }))
+    return normalizedSessions
+  })
 
   const addSessionHistory = useCallback((record: SessionRecord) => {
     setSessionHistory((currentHistory) => [...currentHistory, record])
