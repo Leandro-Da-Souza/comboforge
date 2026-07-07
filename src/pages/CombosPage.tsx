@@ -51,14 +51,14 @@ export default function CombosPage() {
           eyebrow="Built in"
           title="Starter Library"
           sourceLabel="starter"
-          description="Beginner Combos Built In To The Forge"
+          description=""
         />
 
         <ComboList
           combos={customCombos}
           eyebrow="Your Work"
           title="Custom Combos"
-          description="Custom combos join matching discipline workouts automatically."
+          description=""
           sourceLabel="custom"
           headerChild={
             <div className="combo-section-actions">
