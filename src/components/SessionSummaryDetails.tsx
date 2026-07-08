@@ -4,6 +4,7 @@ import {
   formatSessionDuration,
   formatSessionTime,
 } from '../utils/session'
+import { formatCombo } from '../utils/combo'
 import '../styles/session-summary.css'
 import type { ReactNode } from 'react'
 
@@ -47,6 +48,29 @@ export default function SessionSummaryDetails({
           <dd>{formatSessionTime(session.endedAt)}</dd>
         </div>
       </dl>
+
+      <section className="session-summary-combos">
+        <header className="session-summary-combos-header">
+          <p>Combos used</p>
+          <span>{session.combosUsed.length}</span>
+        </header>
+
+        {session.combosUsed.length > 0 ? (
+          <ul>
+            {session.combosUsed.map((combo) => (
+              <li key={combo.id}>
+                <strong>{combo.name}</strong>
+                <span>{formatCombo(combo.actions)}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="session-summary-combos-empty">
+            No combos were recorded.
+          </p>
+        )}
+      </section>
+
       {children && <div className="session-summary-footer">{children}</div>}
     </article>
   )
