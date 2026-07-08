@@ -1,0 +1,9 @@
+# ComboForge Codex config
+# Project-scoped Codex settings.
+
+# Keep Codex in an advisory/pair-programming mode by default.
+# Behavioral rules live in AGENTS.md.
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
