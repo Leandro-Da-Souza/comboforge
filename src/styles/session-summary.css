@@ -64,6 +64,67 @@
   font-weight: 800;
 }
 
+.session-summary-combos {
+  display: grid;
+  gap: 10px;
+}
+
+.session-summary-combos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.session-summary-combos-header p,
+.session-summary-combos-header span {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.session-summary-combos-header span {
+  color: var(--primary);
+}
+
+.session-summary-combos ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.session-summary-combos li {
+  display: grid;
+  gap: 5px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 0.75);
+  padding: 11px 12px;
+  background: color-mix(in srgb, var(--surface-2) 72%, transparent);
+}
+
+.session-summary-combos strong {
+  color: var(--foreground);
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.session-summary-combos li span,
+.session-summary-combos-empty {
+  color: var(--muted-foreground);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.session-summary-combos-empty {
+  margin: 0;
+}
+
 .session-summary-footer {
   display: flex;
   justify-content: flex-end;

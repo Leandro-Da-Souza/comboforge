@@ -94,6 +94,10 @@ export default function SessionList({ sessions }: SessionListProps) {
                       <span>
                         {formatSessionDuration(session.durationSeconds)}
                       </span>
+                      <span>
+                        {session.combosUsed.length}{' '}
+                        {session.combosUsed.length === 1 ? 'combo' : 'combos'}
+                      </span>
                     </p>
                   </article>
                 </li>
