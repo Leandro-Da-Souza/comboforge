@@ -1,0 +1,67 @@
+.session-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+
+.session-stat-card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: var(--surface);
+}
+
+.session-stat-card span {
+  display: block;
+  color: var(--muted-foreground);
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.session-stat-card strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 9vw, 3rem);
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.session-stat-card-featured {
+  border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--primary) 13%, transparent),
+      transparent 62%
+    ),
+    var(--surface);
+  box-shadow: var(--shadow-glow);
+}
+
+.session-stat-card-featured strong {
+  color: var(--primary);
+}
+
+@media (max-width: 560px) {
+  .session-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .session-stat-card-featured {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+}
+
+:root[data-theme='muaythai'] .session-stat-card strong {
+  font-family: var(--ff-sans);
+  font-size: clamp(1.45rem, 7vw, 2.3rem);
+}
