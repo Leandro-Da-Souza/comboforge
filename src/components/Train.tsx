@@ -18,6 +18,7 @@ import type { SessionRecord, SessionSummary } from '../types/session'
 import useSessionHistory from '../hooks/useSessionHistory'
 import { useNavigate } from 'react-router'
 import useCombos from '../hooks/useCombos'
+import { useSpeech } from '../hooks/useSpeech'
 
 type TrainProps = {
   selectedDiscipline: Discipline
@@ -77,6 +78,8 @@ export default function Train({
       combosUsed,
     }
   }, [status, endReason, finishedRounds, sessionSetup, startedAt, combosUsed])
+
+  const { speak } = useSpeech()
 
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
@@ -148,6 +151,14 @@ export default function Train({
     rotateCombo,
     timer.rotationIntervalMilliseconds,
   ])
+
+  useEffect(() => {
+    if (status !== 'running') return
+    if (timer.phase !== 'round') return
+    if (!currentCombo) return
+
+    speak(formatCombo(currentCombo.actions))
+  }, [status, timer.phase, currentCombo, speak])
 
   return (
     <section className="train-screen">
