@@ -33,28 +33,31 @@ export function useComboRotation(combos: Combo[]): ComboRotation {
 
   const [combosUsed, setCombosUsed] = useState<Combo[]>([])
 
-  function markComboUsed(comboToMark: Combo | undefined) {
+  const markComboUsed = useCallback((comboToMark: Combo | undefined) => {
     setCombosUsed((current) => {
       if (!comboToMark) return current
       if (current.some((combo) => combo.id === comboToMark.id)) return current
 
       return [...current, comboToMark]
     })
-  }
+  }, [])
 
   const rotateCombo = useCallback(() => {
     setCurrentCombo(upcomingCombo)
     setUpcomingCombo(getNextCombo(combos, upcomingCombo))
     markComboUsed(upcomingCombo)
-  }, [combos, upcomingCombo])
+  }, [combos, upcomingCombo, markComboUsed])
 
-  function resetCombos(nextCombos: Combo[], shouldMarkFirstCombo = false) {
-    const firstCombo = nextCombos[0]
+  const resetCombos = useCallback(
+    (nextCombos: Combo[], shouldMarkFirstCombo = false) => {
+      const firstCombo = nextCombos[0]
 
-    setCurrentCombo(firstCombo)
-    setUpcomingCombo(nextCombos[1] ?? firstCombo)
-    setCombosUsed(shouldMarkFirstCombo && firstCombo ? [firstCombo] : [])
-  }
+      setCurrentCombo(firstCombo)
+      setUpcomingCombo(nextCombos[1] ?? firstCombo)
+      setCombosUsed(shouldMarkFirstCombo && firstCombo ? [firstCombo] : [])
+    },
+    [],
+  )
 
   return {
     currentCombo,
