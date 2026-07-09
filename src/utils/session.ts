@@ -39,3 +39,19 @@ export function groupSessionsByDate(sessions: SessionHistory) {
     }
   }, {})
 }
+
+export function getSessionStats(sessions: SessionHistory) {
+  return {
+    sessionsCompleted: sessions.filter(
+      (session) => session.endReason === 'completed',
+    ).length,
+    totalTrainingSeconds: sessions.reduce(
+      (total, session) => total + session.durationSeconds,
+      0,
+    ),
+    totalRoundsCompleted: sessions.reduce(
+      (total, session) => total + session.finishedRounds,
+      0,
+    ),
+  }
+}

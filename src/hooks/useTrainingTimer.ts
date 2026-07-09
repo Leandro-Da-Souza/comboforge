@@ -10,14 +10,40 @@ function trainingTimerReducer(
 ): TrainingState {
   switch (action.type) {
     case 'start': {
+      if (state.status === 'paused') {
+        return {
+          ...state,
+          status: state.countdownRemainingSeconds ? 'countdown' : 'running',
+        }
+      }
+
       return {
-        status: 'running',
+        status: 'countdown',
         timer:
           state.status === 'ended'
             ? createTimerState(action.config)
             : state.timer,
+        countdownRemainingSeconds: 3,
         finishedRounds: 0,
         endReason: undefined,
+      }
+    }
+
+    case 'countdownTick': {
+      if (state.status !== 'countdown') return state
+
+      if ((state.countdownRemainingSeconds ?? 0) > 0) {
+        return {
+          ...state,
+          countdownRemainingSeconds: state.countdownRemainingSeconds! - 1,
+        }
+      }
+
+      return {
+        ...state,
+        status: 'running',
+        countdownRemainingSeconds: undefined,
+        startedAt: new Date().toISOString(),
       }
     }
 
@@ -34,8 +60,10 @@ function trainingTimerReducer(
         timer.phase === 'rest' ? timer.currentRound : timer.currentRound - 1
 
       return {
+        ...state,
         status: 'ended',
         timer: createTimerState(action.config),
+        countdownRemainingSeconds: undefined,
         finishedRounds: Math.max(completedRounds, 0),
         endReason: 'abandoned',
       }
@@ -59,8 +87,10 @@ function trainingTimerReducer(
       if (timer.phase === 'round') {
         if (timer.currentRound >= timer.totalRounds) {
           return {
+            ...state,
             status: 'ended',
             timer: resetTimerProgress(timer),
+            countdownRemainingSeconds: undefined,
             finishedRounds: timer.totalRounds,
             endReason: 'completed',
           }
@@ -110,6 +140,16 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
   })
 
   useEffect(() => {
+    if (state.status !== 'countdown') return
+
+    const timeoutId = window.setTimeout(() => {
+      dispatch({ type: 'countdownTick' })
+    }, 1000)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [state.status, state.countdownRemainingSeconds])
+
+  useEffect(() => {
     if (state.status !== 'running') return
     if (state.timer.remainingSeconds <= 0) return
 
@@ -143,6 +183,8 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
     timer: state.timer,
     endReason: state.endReason,
     finishedRounds: state.finishedRounds,
+    countdownRemainingSeconds: state.countdownRemainingSeconds,
+    startedAt: state.startedAt,
     startSession,
     pauseSession,
     endSession,

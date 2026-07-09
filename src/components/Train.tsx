@@ -10,7 +10,7 @@ import SessionSummaryDetails from './SessionSummaryDetails'
 import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import type { Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import TrainingSessionMeta from './TrainingSessionMeta'
@@ -36,6 +36,9 @@ export default function Train({
     startSession,
     pauseSession,
     endSession,
+    resetSession,
+    countdownRemainingSeconds,
+    startedAt,
   } = useTrainingTimer(selectedPreset.config)
 
   const { combos } = useCombos()
@@ -44,8 +47,6 @@ export default function Train({
 
   const { currentCombo, upcomingCombo, resetCombos, rotateCombo, combosUsed } =
     useComboRotation(availableCombos)
-
-  const [startedAt, setStartedAt] = useState<string | undefined>()
 
   const { addSessionHistory } = useSessionHistory()
 
@@ -80,11 +81,13 @@ export default function Train({
   const startButtonLabel =
     status === 'paused' ? 'Resume' : status === 'ended' ? 'Restart' : 'Start'
 
-  const isRunning = status === 'running'
+  const isCountingDown = status === 'countdown'
+  const isRunning = status === 'running' || status === 'countdown'
   const canEnd = status !== 'idle' && status !== 'ended'
   const isSetup = status === 'idle' || status === 'ended'
   const isActiveSession = status === 'running' || status === 'paused'
   const isResting = status === 'running' && timer.phase === 'rest'
+
   const comboKey = isSetup
     ? `setup-${status}`
     : isResting
@@ -92,10 +95,6 @@ export default function Train({
       : (currentCombo?.id ?? 'empty-combo')
 
   function handleStartSession(): void {
-    if (status === 'idle' || status === 'ended') {
-      setStartedAt(new Date().toISOString())
-    }
-    resetCombos(availableCombos, true)
     startSession()
   }
 
@@ -113,15 +112,22 @@ export default function Train({
     }
 
     addSessionHistory(record)
-    setStartedAt(undefined)
+    resetSession(selectedPreset.config)
     void navigate('/history')
   }
 
   function handleDiscardSession(): void {
-    setStartedAt(undefined)
+    resetSession(selectedPreset.config)
   }
 
   const isSessionSummaryOpen = Boolean(sessionSummary)
+
+  useEffect(() => {
+    if (status !== 'running') return
+    if (!startedAt) return
+
+    resetCombos(availableCombos, true)
+  }, [status, startedAt, availableCombos, resetCombos])
 
   useEffect(() => {
     if (status !== 'running') return
@@ -156,9 +162,13 @@ export default function Train({
           currentCombo={
             isSetup
               ? 'Tap Start'
-              : isResting
-                ? 'Rest'
-                : formatCombo(currentCombo?.actions ?? [])
+              : isCountingDown
+                ? countdownRemainingSeconds === 0
+                  ? 'Fight'
+                  : String(countdownRemainingSeconds)
+                : isResting
+                  ? 'Rest'
+                  : formatCombo(currentCombo?.actions ?? [])
           }
           upcomingCombo={
             isResting
