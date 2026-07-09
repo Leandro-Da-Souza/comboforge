@@ -10,6 +10,13 @@ function trainingTimerReducer(
 ): TrainingState {
   switch (action.type) {
     case 'start': {
+      if (state.status === 'paused') {
+        return {
+          ...state,
+          status: state.countdownRemainingSeconds ? 'countdown' : 'running',
+        }
+      }
+
       return {
         status: 'countdown',
         timer:
@@ -53,8 +60,10 @@ function trainingTimerReducer(
         timer.phase === 'rest' ? timer.currentRound : timer.currentRound - 1
 
       return {
+        ...state,
         status: 'ended',
         timer: createTimerState(action.config),
+        countdownRemainingSeconds: undefined,
         finishedRounds: Math.max(completedRounds, 0),
         endReason: 'abandoned',
       }
@@ -78,8 +87,10 @@ function trainingTimerReducer(
       if (timer.phase === 'round') {
         if (timer.currentRound >= timer.totalRounds) {
           return {
+            ...state,
             status: 'ended',
             timer: resetTimerProgress(timer),
+            countdownRemainingSeconds: undefined,
             finishedRounds: timer.totalRounds,
             endReason: 'completed',
           }
