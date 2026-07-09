@@ -10,6 +10,7 @@ const statusLabel: Record<TrainingStatus, string> = {
   running: 'Training',
   paused: 'Paused',
   ended: 'Complete',
+  countdown: 'Get Ready',
 }
 
 export default function SessionStatus({ status }: SessionStatusProps) {

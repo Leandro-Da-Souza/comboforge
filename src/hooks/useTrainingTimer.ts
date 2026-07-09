@@ -11,13 +11,32 @@ function trainingTimerReducer(
   switch (action.type) {
     case 'start': {
       return {
-        status: 'running',
+        status: 'countdown',
         timer:
           state.status === 'ended'
             ? createTimerState(action.config)
             : state.timer,
+        countdownRemainingSeconds: 3,
         finishedRounds: 0,
         endReason: undefined,
+      }
+    }
+
+    case 'countdownTick': {
+      if (state.status !== 'countdown') return state
+
+      if ((state.countdownRemainingSeconds ?? 0) > 0) {
+        return {
+          ...state,
+          countdownRemainingSeconds: state.countdownRemainingSeconds! - 1,
+        }
+      }
+
+      return {
+        ...state,
+        status: 'running',
+        countdownRemainingSeconds: undefined,
+        startedAt: new Date().toISOString(),
       }
     }
 
@@ -110,6 +129,16 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
   })
 
   useEffect(() => {
+    if (state.status !== 'countdown') return
+
+    const timeoutId = window.setTimeout(() => {
+      dispatch({ type: 'countdownTick' })
+    }, 1000)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [state.status, state.countdownRemainingSeconds])
+
+  useEffect(() => {
     if (state.status !== 'running') return
     if (state.timer.remainingSeconds <= 0) return
 
@@ -143,6 +172,8 @@ export function useTrainingTimer(config: TimerConfig = defaultTimerConfig) {
     timer: state.timer,
     endReason: state.endReason,
     finishedRounds: state.finishedRounds,
+    countdownRemainingSeconds: state.countdownRemainingSeconds,
+    startedAt: state.startedAt,
     startSession,
     pauseSession,
     endSession,
