@@ -1,21 +1,30 @@
 import { useCallback } from 'react'
+import useSettings from './useSettings'
 
 export function useSpeech() {
-  const speak = useCallback((text: string) => {
-    if (!('speechSynthesis' in window)) {
-      console.error('No speechSynthesis available')
-      return
-    }
+  const { settings } = useSettings()
+  const { enabled, rate, pitch, volume } = settings.speech
 
-    window.speechSynthesis.cancel()
+  const speak = useCallback(
+    (text: string) => {
+      if (!enabled) return
 
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate = 1
-    utterance.pitch = 1
-    utterance.volume = 1
+      if (!('speechSynthesis' in window)) {
+        console.error('No speechSynthesis available in window')
+        return
+      }
 
-    window.speechSynthesis.speak(utterance)
-  }, [])
+      window.speechSynthesis.cancel()
+
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.rate = rate
+      utterance.pitch = pitch
+      utterance.volume = volume
+
+      window.speechSynthesis.speak(utterance)
+    },
+    [enabled, rate, pitch, volume],
+  )
 
   return { speak }
 }
