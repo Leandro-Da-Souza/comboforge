@@ -9,9 +9,29 @@ type SettingsProviderProps = {
   children: ReactNode
 }
 
+function normalizeSettings(settings: Partial<Settings>): Settings {
+  return {
+    ...guestModeSettings,
+    ...settings,
+    user: {
+      ...guestModeSettings.user,
+      ...settings.user,
+    },
+    speech: {
+      ...guestModeSettings.speech,
+      ...settings.speech,
+    },
+  }
+}
+
 export default function SettingsProvider({ children }: SettingsProviderProps) {
   const [settings, setSettings] = useState<Settings>(() => {
-    return storage.get(STORAGE_KEYS.settings, guestModeSettings)
+    const storedSettings = storage.get<Partial<Settings>>(
+      STORAGE_KEYS.settings,
+      guestModeSettings,
+    )
+
+    return normalizeSettings(storedSettings)
   })
 
   const setSpeechEnabled = useCallback((value: boolean) => {
