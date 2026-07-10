@@ -15,6 +15,7 @@ import Select from '../components/ui/Select'
 import type { Discipline } from '../types/core'
 import { NavLink } from 'react-router'
 import { formatDiscipline } from '../utils/discipline'
+import { difficultyPresets } from '../config/difficulty.config'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
@@ -30,6 +31,7 @@ export default function HomePage() {
   const sessionSetup: SessionSetup = {
     selectedDiscipline,
     selectedPreset,
+    selectedDifficulty: difficultyPresets[0],
   }
 
   function handleTrainNavigation() {

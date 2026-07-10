@@ -1,10 +1,11 @@
-import type { Combo, Discipline } from './core'
+import type { Combo, DifficultyPreset, Discipline } from './core'
 import type { TimerPreset } from './timer'
 import type { TrainingEndReason } from './training'
 
 export type SessionSetup = {
   selectedDiscipline: Discipline
   selectedPreset: TimerPreset
+  selectedDifficulty: DifficultyPreset
 }
 
 export type SessionSummary = {

@@ -11,7 +11,7 @@ import { formatCombo } from '../utils/combo'
 import { useComboRotation } from '../hooks/useComboRotation'
 import { useDisciplineSelection } from '../hooks/useDisciplineSelection'
 import { useEffect, useMemo } from 'react'
-import type { Discipline } from '../types/core'
+import type { DifficultyPreset, Discipline } from '../types/core'
 import type { TimerPreset } from '../types/timer'
 import TrainingSessionMeta from './TrainingSessionMeta'
 import type { SessionRecord, SessionSummary } from '../types/session'
@@ -23,11 +23,13 @@ import { useSpeech } from '../hooks/useSpeech'
 type TrainProps = {
   selectedDiscipline: Discipline
   selectedPreset: TimerPreset
+  selectedDifficulty: DifficultyPreset
 }
 
 export default function Train({
   selectedDiscipline,
   selectedPreset,
+  selectedDifficulty,
 }: TrainProps) {
   const {
     status,
@@ -57,8 +59,9 @@ export default function Train({
     () => ({
       selectedDiscipline,
       selectedPreset,
+      selectedDifficulty,
     }),
-    [selectedDiscipline, selectedPreset],
+    [selectedDiscipline, selectedPreset, selectedDifficulty],
   )
 
   const sessionSummary = useMemo<SessionSummary | undefined>(() => {
@@ -139,7 +142,7 @@ export default function Train({
 
     const intervalId = window.setInterval(() => {
       rotateCombo()
-    }, timer.rotationIntervalMilliseconds)
+    }, sessionSetup.selectedDifficulty.rotationIntervalMilliseconds)
 
     return () => {
       window.clearInterval(intervalId)
@@ -149,7 +152,7 @@ export default function Train({
     timer.phase,
     availableCombos.length,
     rotateCombo,
-    timer.rotationIntervalMilliseconds,
+    sessionSetup.selectedDifficulty.rotationIntervalMilliseconds,
   ])
 
   useEffect(() => {

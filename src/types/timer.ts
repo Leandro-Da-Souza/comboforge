@@ -4,7 +4,6 @@ export type TimerConfig = {
   totalRounds: number
   roundDurationSeconds: number
   restDurationSeconds: number
-  rotationIntervalMilliseconds: number
 }
 
 export type TimerState = TimerConfig & {
