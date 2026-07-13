@@ -166,7 +166,11 @@ export default function Train({
   return (
     <section className="train-screen">
       <div className="train-timer-zone">
-        <TrainingSessionMeta discipline={selectedDiscipline} timer={timer} />
+        <TrainingSessionMeta
+          discipline={selectedDiscipline}
+          difficulty={selectedDifficulty.id}
+          timer={timer}
+        />
         <TimerPanel timer={timer} />
         <SessionStatus status={status} />
       </div>

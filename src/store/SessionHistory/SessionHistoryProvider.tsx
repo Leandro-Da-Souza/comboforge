@@ -3,6 +3,7 @@ import type { SessionHistory, SessionRecord } from '../../types/session'
 import { STORAGE_KEYS } from '../../config/storage.config'
 import { storage } from '../../utils/storage'
 import { SessionHistoryContext } from './SessionHistoryContext'
+import { difficultyPresets } from '../../config/difficulty.config'
 
 type SessionHistoryProviderProps = {
   children: ReactNode
@@ -19,6 +20,11 @@ export default function SessionHistoryProvider({
 
     const normalizedSessions = storedSessions.map((session) => ({
       ...session,
+      sessionSetup: {
+        ...session.sessionSetup,
+        selectedDifficulty:
+          session.sessionSetup.selectedDifficulty ?? difficultyPresets[0],
+      },
       combosUsed: session.combosUsed ?? [],
     }))
     return normalizedSessions

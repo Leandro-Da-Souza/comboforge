@@ -1,21 +1,27 @@
-import type { Discipline } from '../types/core'
+import type { Difficulty, Discipline } from '../types/core'
 import type { TimerState } from '../types/timer'
 import { formatDiscipline } from '../utils/discipline'
 
 type TrainingSessionMetaProps = {
   discipline: Discipline
   timer: TimerState
+  difficulty: Difficulty
 }
 
 export default function TrainingSessionMeta({
   discipline,
   timer,
+  difficulty,
 }: TrainingSessionMetaProps) {
   return (
     <section className="training-session-meta" aria-label="Training session">
       <p>
         <span>Discipline</span>
         <strong>{formatDiscipline(discipline)}</strong>
+      </p>
+      <p>
+        <span>Difficulty</span>
+        <strong>{difficulty}</strong>
       </p>
       <p>
         <span>{timer.phase === 'round' ? 'Round' : 'Rest'}</span>

@@ -34,6 +34,10 @@ export default function SessionSummaryDetails({
           <dd>{formatSessionDiscipline(session)}</dd>
         </div>
         <div>
+          <dt>Difficulty</dt>
+          <dd>{session.sessionSetup.selectedDifficulty.name}</dd>
+        </div>
+        <div>
           <dt>Rounds</dt>
           <dd>
             {session.finishedRounds}/{preset.config.totalRounds}
