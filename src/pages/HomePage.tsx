@@ -15,6 +15,9 @@ import Select from '../components/ui/Select'
 import type { Discipline } from '../types/core'
 import { NavLink } from 'react-router'
 import { formatDiscipline } from '../utils/discipline'
+import { difficultyPresets } from '../config/difficulty.config'
+import { useDifficultySelection } from '../hooks/useDifficultySelection'
+import DifficultySelector from '../components/DifficultySelector'
 
 export default function HomePage() {
   const { selectedPresetId, selectPreset, selectedPreset } =
@@ -25,11 +28,15 @@ export default function HomePage() {
     availableDisciplines[0],
   )
 
+  const { selectedDifficultyId, selectedDifficulty, selectDifficulty } =
+    useDifficultySelection(difficultyPresets)
+
   const navigate = useNavigate()
 
   const sessionSetup: SessionSetup = {
     selectedDiscipline,
     selectedPreset,
+    selectedDifficulty,
   }
 
   function handleTrainNavigation() {
@@ -65,7 +72,7 @@ export default function HomePage() {
 
       <div className="home-setup">
         <div className="home-section-heading">
-          <p className="home-kicker">Preset</p>
+          <p className="home-kicker">Setup</p>
           <NavLink to="/combos">Edit -&gt;</NavLink>
           <Select
             label="Discipline"
@@ -79,11 +86,17 @@ export default function HomePage() {
             }}
           />
         </div>
+
         <PresetSelector
           presets={timerPresets}
           selectedPresetId={selectedPresetId}
           canChangePreset={true}
           onPresetSelect={handlePresetSelect}
+        />
+        <DifficultySelector
+          presets={difficultyPresets}
+          selectedDifficultyId={selectedDifficultyId}
+          onDifficultySelect={selectDifficulty}
         />
       </div>
     </section>

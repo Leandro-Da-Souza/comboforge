@@ -5,6 +5,7 @@ import { useLocation } from 'react-router'
 import { timerPresets } from '../config/timer.config'
 import { availableDisciplines } from '../data/availableDisciplines'
 import type { SessionSetup } from '../types/session'
+import { difficultyPresets } from '../config/difficulty.config'
 
 export default function TrainPage() {
   const location = useLocation()
@@ -14,12 +15,16 @@ export default function TrainPage() {
 
   const selectedDiscipline =
     state?.selectedDiscipline ?? availableDisciplines[0]
+
+  const selectedDifficulty = state?.selectedDifficulty ?? difficultyPresets[0]
+
   return (
     <>
       <PageHeader title={appConfig.name} backHref="/" />
       <Train
         selectedDiscipline={selectedDiscipline}
         selectedPreset={selectedPreset}
+        selectedDifficulty={selectedDifficulty}
       />
     </>
   )

@@ -19,28 +19,39 @@
 }
 
 .training-session-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  color: var(--foreground);
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .training-session-meta p {
-  display: flex;
+  min-width: 0;
+  display: grid;
   gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 0.65);
+  margin: 0;
+  padding: 10px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
 }
 
 .training-session-meta span {
-  color: var(--foreground);
+  color: var(--muted-foreground);
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .training-session-meta strong {
   color: var(--primary);
-  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  text-transform: uppercase;
 }
 
 .discipline-selector {
@@ -70,5 +81,15 @@
 @media (min-width: 720px) {
   .train-screen {
     min-height: calc(100vh - 64px);
+  }
+}
+
+@media (max-width: 420px) {
+  .training-session-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .training-session-meta p:last-child {
+    grid-column: 1 / -1;
   }
 }
