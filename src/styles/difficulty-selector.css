@@ -68,7 +68,9 @@
   text-transform: uppercase;
 }
 
-.difficulty-selector-button[aria-pressed='true'] .difficulty-selector-title span {
+.difficulty-selector-button[aria-pressed='true']
+  .difficulty-selector-title
+  span {
   background: var(--primary);
   color: var(--primary-foreground);
 }
