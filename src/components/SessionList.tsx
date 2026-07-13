@@ -98,6 +98,9 @@ export default function SessionList({ sessions }: SessionListProps) {
                         {session.combosUsed.length}{' '}
                         {session.combosUsed.length === 1 ? 'combo' : 'combos'}
                       </span>
+                      <span>
+                        {session.sessionSetup.selectedDifficulty.name}
+                      </span>
                     </p>
                   </article>
                 </li>
