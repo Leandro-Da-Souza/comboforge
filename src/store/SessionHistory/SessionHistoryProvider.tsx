@@ -5,6 +5,18 @@ import { storage } from '../../utils/storage'
 import { SessionHistoryContext } from './SessionHistoryContext'
 import { difficultyPresets } from '../../config/difficulty.config'
 
+function normalizeSessionHistory(history: SessionHistory): SessionHistory {
+  return history.map((session) => ({
+    ...session,
+    sessionSetup: {
+      ...session.sessionSetup,
+      selectedDifficulty:
+        session.sessionSetup.selectedDifficulty ?? difficultyPresets[0],
+    },
+    combosUsed: session.combosUsed ?? [],
+  }))
+}
+
 type SessionHistoryProviderProps = {
   children: ReactNode
 }
@@ -18,16 +30,7 @@ export default function SessionHistoryProvider({
       [],
     )
 
-    const normalizedSessions = storedSessions.map((session) => ({
-      ...session,
-      sessionSetup: {
-        ...session.sessionSetup,
-        selectedDifficulty:
-          session.sessionSetup.selectedDifficulty ?? difficultyPresets[0],
-      },
-      combosUsed: session.combosUsed ?? [],
-    }))
-    return normalizedSessions
+    return normalizeSessionHistory(storedSessions)
   })
 
   const addSessionHistory = useCallback((record: SessionRecord) => {
@@ -40,13 +43,22 @@ export default function SessionHistoryProvider({
     )
   }, [])
 
+  const replaceSessionHistory = useCallback((history: SessionHistory) => {
+    setSessionHistory(normalizeSessionHistory(history))
+  }, [])
+
   useEffect(() => {
     storage.set(STORAGE_KEYS.sessionHistory, sessionHistory)
   }, [sessionHistory])
 
   return (
     <SessionHistoryContext.Provider
-      value={{ sessionHistory, addSessionHistory, deleteSessionFromHistory }}
+      value={{
+        sessionHistory,
+        addSessionHistory,
+        deleteSessionFromHistory,
+        replaceSessionHistory,
+      }}
     >
       {children}
     </SessionHistoryContext.Provider>

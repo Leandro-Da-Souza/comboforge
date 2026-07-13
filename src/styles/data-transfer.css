@@ -1,0 +1,181 @@
+.data-transfer {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--surface);
+}
+
+.data-transfer-header {
+  display: grid;
+  gap: 4px;
+}
+
+.data-transfer-header h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.data-transfer-header p,
+.data-transfer-action p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.data-transfer-actions {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.data-transfer-action {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  background: color-mix(in srgb, var(--surface) 86%, var(--foreground) 14%);
+}
+
+.data-transfer-action h3 {
+  margin: 0 0 4px;
+  color: var(--foreground);
+  font-family: var(--ff-mono);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.data-transfer-action .button {
+  min-width: 104px;
+  min-height: 44px;
+}
+
+.data-transfer-message {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-family: var(--ff-mono);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.data-transfer-message-error {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+.data-transfer-message-success {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--surface) 80%, var(--foreground) 20%);
+}
+
+.data-transfer-confirmation {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: color-mix(in srgb, var(--primary) 10%, var(--surface));
+}
+
+.data-transfer-confirmation h3 {
+  margin: 0 0 4px;
+  color: var(--foreground);
+  font-family: var(--ff-display);
+  font-size: clamp(1.45rem, 6vw, 2rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.data-transfer-confirmation p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.data-transfer-confirmation dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.data-transfer-confirmation dl div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  background: var(--surface);
+}
+
+.data-transfer-confirmation dt {
+  margin-bottom: 4px;
+  color: var(--muted-foreground);
+  font-family: var(--ff-mono);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.data-transfer-confirmation dd {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--ff-mono);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.data-transfer-confirmation-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.data-transfer-confirmation-actions .button {
+  min-height: 44px;
+}
+
+@media (max-width: 430px) {
+  .data-transfer-action {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .data-transfer-action .button {
+    width: 100%;
+  }
+
+  .data-transfer-confirmation dl,
+  .data-transfer-confirmation-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+:root[data-theme='muaythai'] .data-transfer-header h2 {
+  font-family: var(--ff-sans);
+  font-size: clamp(1.45rem, 7vw, 2.1rem);
+}
+
+:root[data-theme='muaythai'] .data-transfer-confirmation h3 {
+  font-family: var(--ff-sans);
+}

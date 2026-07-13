@@ -42,6 +42,10 @@ export default function ComboProvider({ children }: ComboProviderProps) {
     )
   }, [])
 
+  const replaceCustomCombos = useCallback((combos: Combo[]) => {
+    setCustomCombos(combos)
+  }, [])
+
   useEffect(() => {
     storage.set(STORAGE_KEYS.customCombos, customCombos)
   }, [customCombos])
@@ -55,6 +59,7 @@ export default function ComboProvider({ children }: ComboProviderProps) {
         addCombo,
         updateCombo,
         deleteCombo,
+        replaceCustomCombos,
       }}
     >
       {children}

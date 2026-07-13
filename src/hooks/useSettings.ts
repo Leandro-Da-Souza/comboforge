@@ -14,5 +14,6 @@ export default function useSettings() {
     setSpeechRate: context.setSpeechRate,
     setSpeechPitch: context.setSpeechPitch,
     setSpeechVolume: context.setSpeechVolume,
+    replaceSettings: context.replaceSettings,
   }
 }

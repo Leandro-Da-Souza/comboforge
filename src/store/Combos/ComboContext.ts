@@ -8,6 +8,7 @@ export type ComboStore = {
   addCombo: (combo: Combo) => void
   updateCombo: (combo: Combo) => void
   deleteCombo: (comboId: string) => void
+  replaceCustomCombos: (customCombos: Combo[]) => void
 }
 
 export const ComboContext = createContext<ComboStore | null>(null)

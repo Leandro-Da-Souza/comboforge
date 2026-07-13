@@ -74,6 +74,10 @@ export default function SettingsProvider({ children }: SettingsProviderProps) {
     }))
   }, [])
 
+  const replaceSettings = useCallback((settings: Partial<Settings>) => {
+    setSettings(normalizeSettings(settings))
+  }, [])
+
   useEffect(() => {
     storage.set(STORAGE_KEYS.settings, settings)
   }, [settings])
@@ -86,6 +90,7 @@ export default function SettingsProvider({ children }: SettingsProviderProps) {
         setSpeechRate,
         setSpeechPitch,
         setSpeechVolume,
+        replaceSettings,
       }}
     >
       {children}
