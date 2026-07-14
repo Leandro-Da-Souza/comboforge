@@ -163,6 +163,22 @@ export default function Train({
     speak(formatCombo(currentCombo.actions))
   }, [status, timer.phase, currentCombo, speak])
 
+  useEffect(() => {
+    if (status !== 'running') return
+    if (timer.phase !== 'rest') return
+
+    speak('Rest')
+  }, [status, timer.phase, speak])
+
+  useEffect(() => {
+    if (status !== 'countdown') return
+    if (countdownRemainingSeconds === undefined) return
+
+    if (countdownRemainingSeconds === 0) return
+
+    speak(String(countdownRemainingSeconds))
+  }, [status, countdownRemainingSeconds, speak])
+
   return (
     <section className="train-screen">
       <div className="train-timer-zone">

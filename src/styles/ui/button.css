@@ -1,6 +1,7 @@
 .button {
   min-height: 44px;
   border-radius: var(--radius);
+  font-family: var(--ff-sans);
   font-weight: 700;
   transition:
     border-color 160ms ease,
