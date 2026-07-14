@@ -41,15 +41,17 @@ export function groupSessionsByDate(sessions: SessionHistory) {
 }
 
 export function getSessionStats(sessions: SessionHistory) {
+  const completedSessions = sessions.filter(
+    (session) => session.endReason === 'completed',
+  )
+
   return {
-    sessionsCompleted: sessions.filter(
-      (session) => session.endReason === 'completed',
-    ).length,
-    totalTrainingSeconds: sessions.reduce(
+    sessionsCompleted: completedSessions.length,
+    totalTrainingSeconds: completedSessions.reduce(
       (total, session) => total + session.durationSeconds,
       0,
     ),
-    totalRoundsCompleted: sessions.reduce(
+    totalRoundsCompleted: completedSessions.reduce(
       (total, session) => total + session.finishedRounds,
       0,
     ),
