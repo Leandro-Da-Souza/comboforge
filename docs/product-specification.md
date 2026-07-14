@@ -180,6 +180,8 @@ Lead Jab → Rear Cross → Lead Hook
 
 An interruption is a special event inserted during a combo.
 
+Interruptions are planned for a future version and are not part of the v1 MVP.
+
 Examples:
 
 - Slip
@@ -247,16 +249,19 @@ Fight
 The application should read:
 
 - Combos
-- Interruptions
 - Round transitions
 
 using browser text-to-speech.
+
+Future versions may also read interruptions.
 
 ---
 
 ## Background Music
 
 The application should support optional bundled retro-inspired background music.
+
+Background music is planned for a future version and is not part of the v1 MVP.
 
 Examples:
 
@@ -284,20 +289,21 @@ The application should include starter combos for:
 
 ## Difficulty Presets
 
+For v1, difficulty presets control combo callout pace.
+
 ### Easy
 
 - Slow pace
-- No interruptions
 
 ### Normal
 
 - Medium pace
-- Occasional interruptions
 
 ### Hard
 
 - Fast pace
-- Frequent interruptions
+
+Future versions may also map difficulty presets to interruption frequency.
 
 ---
 
@@ -310,6 +316,9 @@ Users should be able to configure:
 - Offensive interruptions
 - Defensive interruptions
 - Combo sources
+
+Custom difficulty is planned for a future version. For v1, ComboForge should
+ship with fixed difficulty presets.
 
 ---
 
@@ -435,8 +444,7 @@ Included in v1:
 - Text-to-speech
 - Combo engine
 - Custom combos
-- Difficulty presets
-- Custom difficulty settings
+- Difficulty presets for combo callout pace
 - Session history
 - Statistics
 - Local storage
@@ -444,10 +452,29 @@ Included in v1:
 
 ---
 
+# Deferred From v1
+
+The following features are intentionally excluded from the v1 MVP to keep the
+first release focused and shippable:
+
+- Interruptions during combos
+- Interruption frequency controls
+- Offensive and defensive interruption configuration
+- Custom difficulty settings
+- Background music
+
+These features remain compatible with the long-term product direction and may
+be revisited for v2.
+
+---
+
 # Future Enhancements
 
 ## v2
 
+- Interruptions
+- Custom difficulty settings
+- Background music
 - Favorites
 - Combo lists
 - Calendar view

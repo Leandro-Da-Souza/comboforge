@@ -7,6 +7,7 @@ export type SettingsStore = {
   setSpeechRate: (value: number) => void
   setSpeechPitch: (value: number) => void
   setSpeechVolume: (value: number) => void
+  replaceSettings: (value: Partial<Settings>) => void
 }
 
 export const SettingsContext = createContext<SettingsStore | null>(null)

@@ -15,5 +15,6 @@ export default function useCombos() {
     addCombo: context.addCombo,
     updateCombo: context.updateCombo,
     deleteCombo: context.deleteCombo,
+    replaceCustomCombos: context.replaceCustomCombos,
   }
 }

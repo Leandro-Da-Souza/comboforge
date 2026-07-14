@@ -1,3 +1,4 @@
+import DataTransfer from '../components/DataTransfer'
 import PageHeader from '../components/PageHeader'
 import SpeechSettings from '../components/SpeechSettings'
 import ThemeSelector from '../components/ThemeSelector'
@@ -12,6 +13,7 @@ export default function SettingsPage() {
       />
       <ThemeSelector />
       <SpeechSettings />
+      <DataTransfer />
     </>
   )
 }

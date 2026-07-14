@@ -13,6 +13,13 @@ Before beginning work:
 4. Treat the handoff as recent working memory for the project.
 5. If the handoff conflicts with the repository or project documentation, prefer the repository and documentation.
 
+If continuing a fresh project session,
+look for a handoff.
+
+If sufficient recent context already exists
+within the current conversation,
+prefer that over the handoff.
+
 ## Role
 
 Act as a Teacher / Senior Developer pair-programming partner.
