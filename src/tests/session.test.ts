@@ -15,7 +15,7 @@ describe('session utils', () => {
     expect(formatSessionDuration(65)).toBe('01:05')
   })
 
-  it('calculates stats from completed sessions only', () => {
+  it('counts completed sessions while totaling all saved training', () => {
     const sessions: SessionHistory = [
       {
         id: 'completed-session',
@@ -43,8 +43,8 @@ describe('session utils', () => {
 
     expect(getSessionStats(sessions)).toEqual({
       sessionsCompleted: 1,
-      totalTrainingSeconds: 540,
-      totalRoundsCompleted: 3,
+      totalTrainingSeconds: 660,
+      totalRoundsCompleted: 4,
     })
   })
 })

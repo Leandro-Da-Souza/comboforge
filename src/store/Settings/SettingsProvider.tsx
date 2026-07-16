@@ -11,15 +11,38 @@ type SettingsProviderProps = {
 
 function normalizeSettings(settings: Partial<Settings>): Settings {
   return {
-    ...guestModeSettings,
-    ...settings,
     user: {
-      ...guestModeSettings.user,
-      ...settings.user,
+      name:
+        typeof settings.user?.name === 'string'
+          ? settings.user.name
+          : guestModeSettings.user.name,
+      stance:
+        settings.user?.stance === 'orthodox' ||
+        settings.user?.stance === 'southpaw'
+          ? settings.user.stance
+          : guestModeSettings.user.stance,
     },
     speech: {
-      ...guestModeSettings.speech,
-      ...settings.speech,
+      enabled:
+        typeof settings.speech?.enabled === 'boolean'
+          ? settings.speech.enabled
+          : guestModeSettings.speech.enabled,
+      rate:
+        typeof settings.speech?.rate === 'number'
+          ? settings.speech.rate
+          : guestModeSettings.speech.rate,
+      pitch:
+        typeof settings.speech?.pitch === 'number'
+          ? settings.speech.pitch
+          : guestModeSettings.speech.pitch,
+      volume:
+        typeof settings.speech?.volume === 'number'
+          ? settings.speech.volume
+          : guestModeSettings.speech.volume,
+      voice:
+        typeof settings.speech?.voice === 'string'
+          ? settings.speech.voice
+          : guestModeSettings.speech.voice,
     },
   }
 }
