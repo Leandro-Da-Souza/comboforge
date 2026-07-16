@@ -1,5 +1,13 @@
+#root {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background: var(--surface);
+}
+
 .layout {
-  min-height: 100vh;
+  width: min(100%, 430px);
+  min-height: 100dvh;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -15,4 +23,10 @@
 
 .layout-content {
   flex: 1;
+}
+
+@media (min-width: 520px) {
+  .layout {
+    border-inline: 1px solid var(--border);
+  }
 }

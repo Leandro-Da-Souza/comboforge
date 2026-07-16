@@ -47,11 +47,11 @@ export function getSessionStats(sessions: SessionHistory) {
 
   return {
     sessionsCompleted: completedSessions.length,
-    totalTrainingSeconds: completedSessions.reduce(
+    totalTrainingSeconds: sessions.reduce(
       (total, session) => total + session.durationSeconds,
       0,
     ),
-    totalRoundsCompleted: completedSessions.reduce(
+    totalRoundsCompleted: sessions.reduce(
       (total, session) => total + session.finishedRounds,
       0,
     ),

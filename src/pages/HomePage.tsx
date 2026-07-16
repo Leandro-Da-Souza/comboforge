@@ -59,7 +59,7 @@ export default function HomePage() {
         <PageHeader
           eyebrow="All Combos, No Bullshit"
           title={appConfig.name}
-          accountLabel="Guest Mode"
+          accountLabel=""
           accountHref="/settings"
         />
 
